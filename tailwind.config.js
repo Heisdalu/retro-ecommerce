@@ -11,7 +11,7 @@ export default {
     },
     width: {
       100: "100%",
-      slide: "930px",
+      slide: "770px",
     },
     fontWeight: {
       400: "400",

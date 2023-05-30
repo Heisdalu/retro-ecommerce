@@ -5,7 +5,7 @@ const SearchBar = () => {
         type="search"
         name="search"
         id="search"
-        className="border-1 border-solid border-bc1 rounded-rxl outline-none px-0.5 w-[90%] text-0.875 py-1"
+        className="border-1 border-solid border-bc1 rounded-rxl outline-none px-0.5 w-[90%] text-0.875 py-1" autoComplete="off"
       />
       <button className="text-white bg-black py-[11px] px-[16px] rounded-rx2 text-0.875">
         Search
