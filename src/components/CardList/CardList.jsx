@@ -5,15 +5,15 @@ import Card from "./Card";
 
 const CardList = () => {
   return (
-    <div className="border-1 mt-[2rem] grid grid-cols-2 [grid-gap:1rem] p-0.5">
+    <div className="border-1 mt-[2rem] grid grid-cols-2 [grid-gap:1rem] p-0.5 md:grid-cols-3 md:px-2  lg:grid-cols-4 vlg:grid-cols-5">
       <Card image={pic1} />
       <Card />
-      <Card image={pic2}/>
-      <Card image={pic5}/>
-      <Card image={pic5}/>
-      <Card image={pic5}/>
-      <Card image={pic5}/>
-      <Card image={pic5}/>
+      <Card image={pic2} />
+      <Card image={pic5} />
+      <Card image={pic5} />
+      <Card image={pic5} />
+      <Card image={pic5} />
+      <Card image={pic5} />
     </div>
   );
 };

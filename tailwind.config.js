@@ -2,9 +2,15 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    screens: {
+      md: "768px",
+      lg: "1024px",
+      vlg: "1300px",
+    },
     backgroundColor: {
       white: "#fff",
-      black: "#000000;",
+      black: "#000000",
+      gray: "rgb(126, 111, 93)",
     },
     fontFamily: {
       Inter: ["Inter, sans-serif"],
@@ -35,6 +41,7 @@ export default {
     },
     borderColor: {
       bc1: "#CCCCCC",
+      bc2: "#0000001e",
     },
     borderWidth: {
       1: "1px",
