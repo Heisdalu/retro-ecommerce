@@ -1,11 +1,13 @@
 import Header from "./components/Header/Header";
-import HomePage from "./pages/HomePage";
+import Login from "./pages/AuthPage/Login";
+// import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   return (
     <div className="bg-white">
       <Header />
-      <HomePage />
+      {/* <HomePage /> */}
+      <Login />
     </div>
   );
 }

@@ -11,6 +11,10 @@ export default {
       white: "#fff",
       black: "#000000",
       gray: "rgb(126, 111, 93)",
+      sb: "#160B08",
+      lg: "#020A0F",
+      mg: "#ffffff0d",
+      re: "#ffffff26",
     },
     fontFamily: {
       Inter: ["Inter, sans-serif"],
@@ -54,7 +58,12 @@ export default {
     boxShadow: {
       bx1: "inset 0px 1px 1px #00000013",
     },
-    extend: {},
+    extend: {
+      colors: {
+        lb: "#ffffffbf",
+        red: "#ff0000",
+      },
+    },
   },
   plugins: [],
 };
