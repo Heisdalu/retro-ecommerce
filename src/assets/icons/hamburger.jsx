@@ -1,6 +1,6 @@
 
 
-const hamburger = () => {
+const Hamburger = () => {
   return (
     <svg
       width="31"
@@ -30,4 +30,4 @@ const hamburger = () => {
   );
 
 }
-export default hamburger
+export default Hamburger
