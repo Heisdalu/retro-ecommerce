@@ -2,6 +2,7 @@ import Hamburger from "../assets/icons/Hamburger";
 import Cart from "../assets/icons/Cart";
 import SearchBar from "../components/SearchBar/SearchBar";
 import FavoriteList from "../components/FavoriteList/FavoriteList";
+import CardList from "../components/CardList/CardList";
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
       </header>
       <SearchBar />
       <FavoriteList />
+      <CardList />
     </div>
   );
 };
