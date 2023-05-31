@@ -10,3 +10,9 @@
     transition: all 500ms;
   }
 }
+
+@layer components {
+  .authBtn {
+    @apply bg-white text-black py-1 px-2 rounded-[6px] mx-auto font-700 active:bg-black active:text-white active:rounded-[6px];
+  }
+}
