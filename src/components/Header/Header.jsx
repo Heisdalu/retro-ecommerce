@@ -1,9 +1,9 @@
 import Hamburger from "../../assets/icons/Hamburger";
-import Cart from "../../assets/icons/Cart";
+import CartIcon from "../../assets/icons/CartIcon";
 
 const Header = () => {
   return (
-    <header className="flex items-center p-1 py-[1.3rem] text-center border-b-1 border-bc1 md:px-2">
+    <header className="flex items-center p-1 py-[1.3rem] text-center border-b-1 sticky border-bc1 top-[0] z-[11] bg-white md:px-2">
       <button className="md:hidden">
         <Hamburger />
       </button>
@@ -18,7 +18,7 @@ const Header = () => {
         <div className="absolute top-[-15px] right-[0] bg-gray text-white text-0.75 rounded-[50%] w-[20px] h-[20px]">
           4
         </div>
-        <Cart />
+        <CartIcon />
       </button>
     </header>
   );

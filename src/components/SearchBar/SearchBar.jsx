@@ -1,6 +1,6 @@
 const SearchBar = () => {
   return (
-    <div className="p-1 pt-1.5 pb-1  flex font-400 font-Inter md:justify-center sticky">
+    <div className="p-1 pt-1.5 pb-1  flex font-400 font-Inter md:justify-center sticky top-[0]">
       <input
         type="search"
         name="search"

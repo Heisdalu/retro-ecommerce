@@ -1,15 +1,17 @@
 import Header from "./components/Header/Header";
-import Login from "./pages/AuthPage/Login";
-import SignUp from "./pages/AuthPage/SignUp";
-// import HomePage from "./pages/HomePage/HomePage";
+// import Login from "./pages/AuthPage/Login";
+// import SignUp from "./pages/AuthPage/SignUp";
+// import CartPage from "./pages/CartPage/CartPage";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   return (
-    <div className="bg-white">
+    <div className="bg-white relative">
       <Header />
-      {/* <HomePage /> */}
+      <HomePage />
       {/* <Login /> */}
-      <SignUp />
+      {/* <SignUp /> */}
+      {/* <CartPage /> */}
     </div>
   );
 }

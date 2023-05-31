@@ -15,6 +15,7 @@ export default {
       lg: "#020A0F",
       mg: "#ffffff0d",
       re: "#ffffff26",
+      cartBg: "#e4e4e5",
     },
     fontFamily: {
       Inter: ["Inter, sans-serif"],
@@ -47,7 +48,7 @@ export default {
       bc1: "#CCCCCC",
       bc2: "#0000001e",
       fc1: "rgb(102, 175, 233)",
-      white: '#fff'
+      white: "#fff",
     },
     borderWidth: {
       1: "1px",
