@@ -6,7 +6,7 @@
   /* when hover is supported */
   .btn:hover {
     color: #ffffff;
-    background: #171616cd;
+    background: #1f1f1fab;
     transition: all 500ms;
   }
 }

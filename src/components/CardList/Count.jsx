@@ -1,12 +1,18 @@
+import { useState } from "react";
+import NotSavedIcon from "../../assets/icons/NotSavedIcon";
+import SavedIcon from "../../assets/icons/SavedIcon";
+
 const Count = () => {
+  const [clicked, setClicked] = useState(false);
+
   return (
-    <div
-      className="text-0.75 absolute right-[0] font-Inter font-400 top-[0]
+    <button
+      className="text-0.75 absolute right-[3px] font-Inter font-400 top-[5px]
       "
+      onClick={() => setClicked((prev) => !prev)}
     >
-      <div className="text-center bg-black text-white">0</div>
-      <div className="mt-[3px] bg-black text-white">count</div>
-    </div>
+      {clicked ? <SavedIcon /> : <NotSavedIcon />}
+    </button>
   );
 };
 export default Count;

@@ -5,7 +5,7 @@ import CardList from "../../components/CardList/CardList";
 const HomePage = () => {
   return (
     <div>
-      <div className="sticky top-[91px] z-[11] bg-white">
+      <div className="sticky top-[91px] z-[11] bg-white md:static">
         <SearchBar />
         <FavoriteList />
       </div>
