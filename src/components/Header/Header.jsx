@@ -1,5 +1,6 @@
 import Hamburger from "../../assets/icons/Hamburger";
 import CartIcon from "../../assets/icons/CartIcon";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -7,19 +8,27 @@ const Header = () => {
       <button className="md:hidden">
         <Hamburger />
       </button>
-      <h1 className="w-[100%] font-700 text-2 md:mr-auto md:w-[auto]">RETRO</h1>
-      <button className="hidden py-0.5 px-1 md:block md:text-1 border-1  active:bg-black active:text-white rounded-[7px]">
+      <h1 className="w-[100%] font-700 text-2 md:mr-auto md:w-[auto]">
+        <Link to="/">RETRO</Link>
+      </h1>
+      <Link
+        to="sign-up"
+        className="hidden py-0.5 px-1 md:block md:text-1 border-1  active:bg-black active:text-white rounded-[7px]"
+      >
         Sign up
-      </button>
-      <button className="hidden border-1 mx-1 py-0.5 px-1 md:block md:text-1 rounded-[7px] bg-black text-white active:bg-white active:text-black">
+      </Link>
+      <Link
+        to="login"
+        className="hidden border-1 mx-1 py-0.5 px-1 md:block md:text-1 rounded-[7px] bg-black text-white active:bg-white active:text-black"
+      >
         Login
-      </button>
-      <button className="ml-auto md:ml-[0] relative">
+      </Link>
+      <Link to="cart" className="ml-auto md:ml-[0] relative">
         <div className="absolute top-[-15px] right-[0] bg-gray text-white text-0.75 rounded-[50%] w-[20px] h-[20px]">
           4
         </div>
         <CartIcon />
-      </button>
+      </Link>
     </header>
   );
 };

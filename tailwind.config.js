@@ -49,6 +49,7 @@ export default {
       bc2: "#0000001e",
       fc1: "rgb(102, 175, 233)",
       white: "#fff",
+      red: "#ff0000",
     },
     borderWidth: {
       1: "1px",
