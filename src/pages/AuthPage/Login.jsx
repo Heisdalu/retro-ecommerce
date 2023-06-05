@@ -2,42 +2,52 @@ import { useFormik } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import Loading from "../../components/Loading/Loading";
+import { SuccessToast, FailedToast } from "../../helpers/Toast/Toast";
+import useSignIn from "../../hooks/auth/useSignIn";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+
+const intialObj = {
+  email: "",
+  password: "",
+};
+
+const yupValidate = Yup.object({
+  email: Yup.string()
+    .email("Input a valid email address")
+    .required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
 const Login = () => {
-  const intialObj = {
-    email: "",
-    password: "",
-  };
+  const { signIn, data, error, errorMessage, loading } = useSignIn();
+  const navigate = useNavigate();
 
-  const yupValidate = Yup.object({
-    email: Yup.string()
-      .email("Input a valid email address")
-      .required("Email is required"),
-    password: Yup.string()
-      .min(4, "Password must be at least 4 characters")
-      .required("Password is required"),
-  });
+  const { handleBlur, handleSubmit, values, handleChange, touched, errors } =
+    useFormik({
+      initialValues: intialObj,
+      validationSchema: yupValidate,
+      onSubmit: async (value, formikBag) => {
+        signIn(value.email, value.password);
+        formikBag.resetForm();
+      },
+    });
 
-  const {
-    handleBlur,
-    handleSubmit,
-    values,
-    handleChange,
-    touched,
-    errors,
-    isSubmitting,
-    isValid,
-  } = useFormik({
-    initialValues: intialObj,
-    validationSchema: yupValidate,
-    onSubmit: (value) => {
-      console.log(value);
-    },
-  });
-
-  const disabledBtn = isSubmitting && isValid;
-
-  console.log(errors);
+  useEffect(() => {
+    // if user is authenticated... return to home page
+    if (Object.keys(data).length > 0) {
+      SuccessToast("Logged in successfully");
+      setTimeout(() => {
+        navigate("/");
+      }, 1500);
+    }
+    //if error occurs in authentication
+    if (error) {
+      FailedToast(errorMessage);
+    }
+  }, [data, error, errorMessage, navigate]);
 
   return (
     <div className="bg-white h-[calc(100vh-90px)] flex justify-center items-center">
@@ -94,9 +104,9 @@ const Login = () => {
           <button
             className="authBtn mt-1 text-white bg-black mx-auto h-[56px] w-[111px] centerPos"
             type="submit"
-            disabled={disabledBtn && true}
+            disabled={loading && true}
           >
-            {disabledBtn ? <Loading /> : "Log in"}
+            {loading ? <Loading /> : "Log in"}
           </button>
         </form>
 
