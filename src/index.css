@@ -16,7 +16,11 @@
     @apply bg-white text-black py-1 px-2 rounded-[6px] mx-auto font-700 active:bg-black active:text-white active:rounded-[6px];
   }
 
-  .centerPos{
-    @apply flex justify-center items-center
+  .centerPos {
+    @apply flex justify-center items-center;
+  }
+
+  .authInput {
+    @apply bg-re p-0.5 rounded-[6px] text-1 outline-none focus:shadow-fx1 focus:border-fc1 border-1;
   }
 }

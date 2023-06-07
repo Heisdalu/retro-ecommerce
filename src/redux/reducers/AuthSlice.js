@@ -13,6 +13,11 @@ const AuthSlice = createSlice({
       state.isAuthenticated = true;
       state.userAuthDetail = action.payload.userCredential;
     },
+    // eslint-disable-next-line no-unused-vars
+    failed(state, _) {
+      state.isAuthenticated = false;
+      state.userAuthDetail = {};
+    },
   },
 });
 
