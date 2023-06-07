@@ -7,9 +7,21 @@ import CartPage from "./pages/CartPage/CartPage";
 import HomePage from "./pages/HomePage/HomePage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchData } from "./redux/thunk/DataThunk";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
+  const data = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  console.log(data);
+
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
   return (
     <>

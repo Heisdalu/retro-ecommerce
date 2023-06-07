@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const Loading = ({ color = "#fff" }) => {
+const Loading = ({ color = "#fff", style = "" }) => {
   return (
     <svg
       version="1.1"
@@ -12,6 +12,7 @@ const Loading = ({ color = "#fff" }) => {
       viewBox="0 0 100 100"
       enableBackground="new 0 0 0 0"
       xmlSpace="preserve"
+      className={style}
     >
       <path
         fill={color}
@@ -34,4 +35,5 @@ export default Loading;
 
 Loading.propTypes = {
   color: PropTypes.string,
+  style: PropTypes.string,
 };
