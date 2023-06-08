@@ -10,14 +10,14 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchData } from "./redux/thunk/DataThunk";
-import Loading from "./components/Loading/Loading";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.auth);
-  const data = useSelector((state) => state);
+  const { error, errorMessage } = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
-  console.log(data);
+  console.log(error);
 
   useEffect(() => {
     dispatch(fetchData());
@@ -40,18 +40,26 @@ function App() {
       <div className="bg-white relative">
         <Header isAuthenticated={isAuthenticated} />
 
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route
-            path="/login"
-            element={<Login isAuthenticated={isAuthenticated} />}
-          />
-          <Route
-            path="/sign-up"
-            element={<SignUp isAuthenticated={isAuthenticated} />}
-          />
-          <Route path="/Cart" element={<CartPage />} />
-        </Routes>
+        {!error && (
+          <div>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/login"
+                element={<Login isAuthenticated={isAuthenticated} />}
+              />
+              <Route
+                path="/sign-up"
+                element={<SignUp isAuthenticated={isAuthenticated} />}
+              />
+              <Route path="/Cart" element={<CartPage />} />
+              <Route path="*" element={<ErrorPage text="Page not found" />} />
+            </Routes>
+          </div>
+        )}
+
+        {/* if main data fails to fetch, show eror page */}
+        {error && <ErrorPage text={errorMessage} />}
       </div>
     </>
   );

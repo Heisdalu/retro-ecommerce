@@ -1,7 +1,10 @@
 import PropTypes from "prop-types";
 import Count from "./Count";
+import pic1 from "../../assets/seven-min.jpg";
 
-const Card = ({ image, title, price }) => {
+
+
+const Card = ({ image, title, price, id }) => {
   return (
     <div className="font-Inter p-0.5 border-1 border-bc2 relative grid">
       <Count />
@@ -29,4 +32,5 @@ Card.propTypes = {
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
 };
