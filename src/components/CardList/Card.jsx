@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import Count from "./Count";
-import pic1 from "../../assets/seven-min.jpg";
 
 
 

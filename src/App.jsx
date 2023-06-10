@@ -11,17 +11,29 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchData } from "./redux/thunk/DataThunk";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import useLocalStoage from "./hooks/localStorage/useLocalStoage";
+import { fetchUserProduct } from "./redux/thunk/UserProductThunk";
+import { update_UserProduct_ForNot_SignedInUser } from "./redux/reducers/UserProductSlice";
 
 function App() {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, userAuthDetail } = useSelector(
+    (state) => state.auth
+  );
   const { error, errorMessage } = useSelector((state) => state.data);
   const dispatch = useDispatch();
-
-  console.log(error);
+  const { localState } = useLocalStoage();
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      dispatch(fetchUserProduct(userAuthDetail.uid));
+    } else {
+      dispatch(update_UserProduct_ForNot_SignedInUser(localState));
+    }
+  }, [dispatch, isAuthenticated, localState, userAuthDetail.uid]);
 
   return (
     <>

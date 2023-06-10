@@ -22,7 +22,7 @@ const SignUp = ({ isAuthenticated }) => {
     useFormik({
       initialValues: initialValues,
       validationSchema: SignUpValidation,
-      onSubmit: (values, { resetForm }) => {
+      onSubmit: (values) => {
         console.log(values);
         signUp(
           values.firstname,
@@ -30,11 +30,8 @@ const SignUp = ({ isAuthenticated }) => {
           values.email,
           values.password
         );
-
-        resetForm();
       },
     });
-
 
   useEffect(() => {
     if (isAuthenticated) {

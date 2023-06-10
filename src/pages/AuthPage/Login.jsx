@@ -22,9 +22,8 @@ const Login = ({ isAuthenticated }) => {
     useFormik({
       initialValues: intialObj,
       validationSchema: LoginValidate,
-      onSubmit: async (value, { resetForm }) => {
+      onSubmit: async (value) => {
         Login(value.email, value.password);
-        resetForm();
       },
     });
 

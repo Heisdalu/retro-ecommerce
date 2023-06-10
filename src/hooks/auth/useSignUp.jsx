@@ -3,6 +3,9 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../configs/firebase-config";
 import { success } from "../../redux/reducers/AuthSlice";
 import { useDispatch } from "react-redux";
+import { db } from "../../configs/firebase-config";
+import { doc, setDoc } from "@firebase/firestore";
+import { initial, USERS } from "../../constants/Types";
 
 const useSignUp = () => {
   const [loading, setLoading] = useState(false);
@@ -25,6 +28,9 @@ const useSignUp = () => {
           displayName: `${firstname} ${lastname}`,
         });
       }
+
+      // create an initial databse for new users
+      await setDoc(doc(db, USERS, response.user.uid), initial);
 
       dispatch(
         success({
