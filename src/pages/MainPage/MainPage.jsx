@@ -1,14 +1,12 @@
 import SearchBar from "../../components/SearchBar/SearchBar";
 import FavoriteList from "../../components/FavoriteList/FavoriteList";
-import CardList from "../../components/CardList/CardList";
 import Loading from "../../components/Loading/Loading";
-import { useSelector } from "react-redux";
+import CardList from "../../components/CardList/CardList";
 
-const HomePage = () => {
-  const { data, loading} = useSelector((state) => state.data);
+const MainPage = () => {
 
-  // console.log(data, loading, error);
 
+  console.log("main");
   return (
     <div>
       <div>
@@ -17,15 +15,15 @@ const HomePage = () => {
           <FavoriteList />
         </div>
 
-        {loading && (
+        {
           <div className="flex flex-col justify-center text-center mt-2">
             <Loading color="#000" style="h-[100px]" />
             <div>Please wait...</div>
           </div>
-        )}
-        <CardList dataItem={data} />
+        }
+        <CardList dataItem={[]} />
       </div>
     </div>
   );
 };
-export default HomePage;
+export default MainPage;
