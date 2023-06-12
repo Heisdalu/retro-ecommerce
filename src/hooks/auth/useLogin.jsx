@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { auth } from "../../configs/firebase-config";
 import { signInWithEmailAndPassword } from "@firebase/auth";
-import { success } from "../../redux/reducers/AuthSlice";
+import { success } from "../../redux/reducers/AuthSlice/AuthSlice";
 import { useDispatch } from "react-redux";
 
 const useLogin = () => {

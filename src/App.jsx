@@ -4,36 +4,19 @@ import Header from "./components/Header/Header";
 import Login from "./pages/AuthPage/Login";
 import SignUp from "./pages/AuthPage/SignUp";
 import CartPage from "./pages/CartPage/CartPage";
-import HomePage from "./pages/HomePage/HomePage";
+import VisitorPage from "./pages/VisitorPage/VisitorPage";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { fetchData } from "./redux/thunk/DataThunk";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
-import useLocalStoage from "./hooks/localStorage/useLocalStoage";
-import { fetchUserProduct } from "./redux/thunk/UserProductThunk";
-import { update_UserProduct_ForNot_SignedInUser } from "./redux/reducers/UserProductSlice";
+import MainPage from "./pages/MainPage/MainPage";
 
 function App() {
-  const { isAuthenticated, userAuthDetail } = useSelector(
+  const { isAuthenticated } = useSelector(
     (state) => state.auth
   );
-  const { error, errorMessage } = useSelector((state) => state.data);
-  const dispatch = useDispatch();
-  const { localState } = useLocalStoage();
+  const { error, errorMessage } = useSelector((state) => state.visitor);
 
-  useEffect(() => {
-    dispatch(fetchData());
-  }, [dispatch]);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      dispatch(fetchUserProduct(userAuthDetail.uid));
-    } else {
-      dispatch(update_UserProduct_ForNot_SignedInUser(localState));
-    }
-  }, [dispatch, isAuthenticated, localState, userAuthDetail.uid]);
 
   return (
     <>
@@ -55,7 +38,10 @@ function App() {
         {!error && (
           <div>
             <Routes>
-              <Route path="/" element={<HomePage />} />
+              <Route
+                path="/"
+                element={isAuthenticated ? <MainPage /> : <VisitorPage />}
+              />
               <Route
                 path="/login"
                 element={<Login isAuthenticated={isAuthenticated} />}

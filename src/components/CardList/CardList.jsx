@@ -1,15 +1,10 @@
 import PropTypes from "prop-types";
 import Card from "./Card";
 
-const CardList = ({ dataItem }) => {
+const CardList = ({ dataItem, userProduct }) => {
+  console.log(userProduct);
   const allCards = dataItem.map((item) => (
-    <Card
-      key={item?.id}
-      id={item?.id}
-      image={item?.image}
-      title={item?.title}
-      price={item?.price}
-    />
+    <Card key={item?.id} itemDetail={item} userProduct={userProduct} />
   ));
   // console.log(dataItem);
   return (
@@ -22,4 +17,5 @@ export default CardList;
 
 CardList.propTypes = {
   dataItem: PropTypes.array,
+  userProduct: PropTypes.array,
 };
