@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserProduct } from "../thunk/UserProductThunk";
+import { fetchUserProduct } from "../../thunk/UserProductThunk";
 
 const userProductSlice = createSlice({
   name: "userProduct",
@@ -9,11 +9,7 @@ const userProductSlice = createSlice({
     error: false,
     errorMessage: "",
   },
-  reducers: {
-    update_UserProduct_ForNot_SignedInUser(state, action) {
-      state.data = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserProduct.pending, (state) => {
@@ -31,6 +27,5 @@ const userProductSlice = createSlice({
   },
 });
 
-export const { update_UserProduct_ForNot_SignedInUser } =
-  userProductSlice.actions;
+
 export default userProductSlice.reducer;

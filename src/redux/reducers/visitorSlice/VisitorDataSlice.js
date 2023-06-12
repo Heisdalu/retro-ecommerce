@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchData } from "../thunk/DataThunk";
+import { fetchData } from "../../thunk/DataThunk";
 
-const dataSlice = createSlice({
+const visitorDataSlice = createSlice({
   name: "data",
   initialState: {
-    data: [],
+    visitorData: [],
     loading: false,
     error: false,
     errorMessage: "",
@@ -17,7 +17,7 @@ const dataSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.visitorData = action.payload;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.error = true;
@@ -27,4 +27,4 @@ const dataSlice = createSlice({
   },
 });
 
-export default dataSlice.reducer;
+export default visitorDataSlice.reducer;
