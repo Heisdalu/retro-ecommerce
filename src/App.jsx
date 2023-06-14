@@ -14,7 +14,7 @@ function App() {
   const { isAuthenticated } = useSelector(
     (state) => state.auth
   );
-  const { error, errorMessage } = useSelector((state) => state.visitor);
+  const { error, errorMessage } = useSelector((state) => state.visitor.data );
 
 
 

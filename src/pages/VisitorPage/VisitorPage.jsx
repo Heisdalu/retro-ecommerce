@@ -7,21 +7,29 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchData } from "../../redux/thunk/DataThunk";
 import useLocalStoage from "../../hooks/localStorage/useLocalStoage";
-import { updateProduct } from "../../redux/reducers/visitorSlice/VisitorProductSlice";
+import {
+  updateProduct,
+  updateSaved,
+} from "../../redux/reducers/visitorSlice/VisitorProductSlice";
 
 const HomePage = () => {
   const dispatch = useDispatch();
   const { visitorData, loading } = useSelector((state) => state.visitor.data);
-  const { visitorProduct } = useSelector((state) => state.visitor.product);
+  const product = useSelector((state) => state.visitor.product);
   const { localState } = useLocalStoage();
+
+  // console.log(visitorSaved);
 
   useEffect(() => {
     dispatch(fetchData());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(updateProduct(localState));
-  }, [dispatch, localState]);
+    console.log(localState?.cart);
+    dispatch(updateProduct(localState?.cart || []));
+    dispatch(updateSaved(localState?.saved || []));
+  }, [dispatch, localState?.cart, localState?.saved]);
 
   return (
     <div>
@@ -37,7 +45,7 @@ const HomePage = () => {
             <div>Please wait...</div>
           </div>
         )}
-        <CardList dataItem={visitorData} userProduct={visitorProduct} />
+        <CardList dataItem={visitorData} userProduct={product} />
       </div>
     </div>
   );

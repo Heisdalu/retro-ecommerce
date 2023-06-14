@@ -8,14 +8,10 @@ const useLocalStoage = () => {
 
   const [localState, setLocalState] = useState(initialState);
 
-  const setItem = (obj) => {
-    localStorage.setItem(RETRO_CART, JSON.stringify(obj));
-    const getData = JSON.parse(localStorage.getItem(RETRO_CART));
-    setLocalState(getData);
-  };
-
-  const removeItem = () => {
-    localStorage.removeItem(RETRO_CART);
+  const setItemLocalStorage = (obj) => {
+    const stored = JSON.parse(localStorage.getItem(RETRO_CART));
+    const objStringify = { ...stored, ...obj };
+    localStorage.setItem(RETRO_CART, JSON.stringify(objStringify));
   };
 
   useEffect(() => {
@@ -28,6 +24,6 @@ const useLocalStoage = () => {
     }
   }, [localState]);
 
-  return { localState, setItem, removeItem };
+  return { localState, setItemLocalStorage };
 };
 export default useLocalStoage;

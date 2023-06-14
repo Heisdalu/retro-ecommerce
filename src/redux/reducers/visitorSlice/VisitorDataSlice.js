@@ -9,7 +9,11 @@ const visitorDataSlice = createSlice({
     error: false,
     errorMessage: "",
   },
-  reducers: {},
+  reducers: {
+    updateVistorData: (state, action) => {
+      state.visitorData = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -26,5 +30,7 @@ const visitorDataSlice = createSlice({
       });
   },
 });
+
+export const { updateVistorData } = visitorDataSlice.actions;
 
 export default visitorDataSlice.reducer;
