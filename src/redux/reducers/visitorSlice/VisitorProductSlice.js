@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  visitorProduct: [],
+  visitorCart: [],
   visitorSaved: [],
 };
 
@@ -9,8 +9,8 @@ const visitorProductSlice = createSlice({
   name: "product",
   initialState: initialState,
   reducers: {
-    updateProduct: (state, action) => {
-      state.visitorProduct = action.payload;
+    updateCart: (state, action) => {
+      state.visitorCart = action.payload;
     },
     updateSaved: (state, action) => {
       state.visitorSaved = action.payload;
@@ -18,5 +18,5 @@ const visitorProductSlice = createSlice({
   },
 });
 
-export const { updateProduct, updateSaved } = visitorProductSlice.actions;
+export const { updateCart, updateSaved } = visitorProductSlice.actions;
 export default visitorProductSlice.reducer;

@@ -3,33 +3,11 @@ import FavoriteList from "../../components/FavoriteList/FavoriteList";
 import CardList from "../../components/CardList/CardList";
 import Loading from "../../components/Loading/Loading";
 import PropTypes from "prop-types";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { fetchData } from "../../redux/thunk/DataThunk";
-import useLocalStoage from "../../hooks/localStorage/useLocalStoage";
-import {
-  updateProduct,
-  updateSaved,
-} from "../../redux/reducers/visitorSlice/VisitorProductSlice";
+import { useSelector } from "react-redux";
 
-const HomePage = () => {
-  const dispatch = useDispatch();
+const VisitorPage = () => {
   const { visitorData, loading } = useSelector((state) => state.visitor.data);
   const product = useSelector((state) => state.visitor.product);
-  const { localState } = useLocalStoage();
-
-  // console.log(visitorSaved);
-
-  useEffect(() => {
-    dispatch(fetchData());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log(localState?.cart);
-    dispatch(updateProduct(localState?.cart || []));
-    dispatch(updateSaved(localState?.saved || []));
-  }, [dispatch, localState?.cart, localState?.saved]);
 
   return (
     <div>
@@ -50,9 +28,9 @@ const HomePage = () => {
     </div>
   );
 };
-export default HomePage;
+export default VisitorPage;
 
-HomePage.propTypes = {
+VisitorPage.propTypes = {
   data: PropTypes.array,
   loading: PropTypes.bool,
 };

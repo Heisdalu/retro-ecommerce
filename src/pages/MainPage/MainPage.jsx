@@ -21,7 +21,7 @@ const MainPage = () => {
             <div>Please wait...</div>
           </div>
         }
-        <CardList dataItem={[]} />
+        {/* <CardList dataItem={[]} /> */}
       </div>
     </div>
   );

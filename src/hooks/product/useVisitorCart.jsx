@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import {
-  updateProduct,
+  updateCart,
   updateSaved,
 } from "../../redux/reducers/visitorSlice/VisitorProductSlice";
 import useLocalStoage from "../localStorage/useLocalStoage";
@@ -17,12 +17,12 @@ const useVisitorCart = () => {
       const data = productArr.map((el) =>
         el.id === item.id ? { ...el, count: el.count + 1 } : el
       );
-      dispatch(updateProduct(data));
+      dispatch(updateCart(data));
       return setItemLocalStorage({ cart: data });
     }
 
     const newArr = [...productArr, { ...item, count: 1 }];
-    dispatch(updateProduct(newArr));
+    dispatch(updateCart(newArr));
     setItemLocalStorage({ cart: newArr });
   };
 
@@ -37,7 +37,7 @@ const useVisitorCart = () => {
             sameID(el) ? { ...item, count: item.count - 1 } : el
           );
 
-    dispatch(updateProduct(newproductData));
+    dispatch(updateCart(newproductData));
     setItemLocalStorage({ cart: newproductData });
   };
 

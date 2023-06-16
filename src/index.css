@@ -29,6 +29,15 @@
   }
 
   .addToCartBtn {
-    @apply w-100 p-1 rounded-[5px] self-end text-center border-1 active:bg-black active:text-white btn
+    @apply w-100 p-1 rounded-[5px] self-end text-center border-1 active:bg-black active:text-white btn;
+  }
+
+  .btnDisabled:disabled {
+    background-color: #e0e0e0;
+    opacity: 0.5;
+  }
+
+  .btnDisabled:active {
+    @apply bg-[#87cefa];
   }
 }

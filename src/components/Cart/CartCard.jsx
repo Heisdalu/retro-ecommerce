@@ -1,17 +1,32 @@
-import pic from "../../assets/seven-min.jpg";
+// import pic from "../../assets/seven-min.jpg";
 import Remove from "../../assets/icons/remove";
 import Plus from "../../assets/icons/Plus";
 import Delete from "../../assets/icons/Delete";
+import { formatNumber } from "../../helpers/FormatNumber";
+import PropTypes from "prop-types";
+import useVisitorCart from "../../hooks/product/useVisitorCart";
 
-const CartCard = () => {
+const CartCard = ({ item, userCart }) => {
+  const { visitorAddToCart, visitorDeleteFromCart } = useVisitorCart();
+
+  const increaseCartHandler = () => {
+    visitorAddToCart(userCart, item);
+  };
+
+  const decreaseCartHandler = () => {
+    visitorDeleteFromCart(userCart, item);
+  };
+
   return (
     <article className="grid grid-cols-[1fr_2fr] [grid-gap:1rem] p-0.5 bg-white rounded-[6px]">
       <div className="">
-        <img src={pic} alt="" />
+        <img src={item.image} alt="" />
       </div>
       <div>
-        <h3 className="text-0.875">Original Meat and sauce</h3>
-        <p className="font-Inter font-500 py-[3px]">₦ 1,500</p>
+        <h3 className="text-0.875">{item?.title}</h3>
+        <p className="font-Inter font-500 py-[3px]">
+          {formatNumber(item?.price)}
+        </p>
         <p className="text-0.875">In stock</p>
       </div>
       <div className="mt-1 w-100 [grid-area:2/1/3/3] grid grid-cols-[1fr_1fr] items-center">
@@ -21,12 +36,19 @@ const CartCard = () => {
           </span>
           REMOVE
         </button>
-        <div className="flex border-y-1 w-[150px] ml-auto items-center">
-          <button className="border-x-1 w-[32px] h-[32px] flex justify-center centerPos">
+        <div className="flex w-[150px] ml-auto items-center rounded-[4px]">
+          <button
+            disabled={item?.count === 1}
+            onClick={decreaseCartHandler}
+            className="border-1 rounded-l-[4px] w-[32px] h-[32px] flex justify-center centerPos btnDisabled"
+          >
             <Delete />
           </button>
-          <div className="mx-auto centerPos">0</div>
-          <button className="border-x-1 w-[32px] h-[32px] centerPos">
+          <div className="mx-auto centerPos">{item.count}</div>
+          <button
+            className="border-1 w-[32px] h-[32px] centerPos rounded-[4px]"
+            onClick={increaseCartHandler}
+          >
             <Plus />
           </button>
         </div>
@@ -35,3 +57,8 @@ const CartCard = () => {
   );
 };
 export default CartCard;
+
+CartCard.propTypes = {
+  item: PropTypes.object,
+  userCart: PropTypes.array,
+};

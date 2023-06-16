@@ -9,14 +9,31 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import MainPage from "./pages/MainPage/MainPage";
+import { useEffect } from "react";
+import { fetchData } from "./redux/thunk/DataThunk";
+import { useDispatch } from "react-redux";
+import {
+  updateCart,
+  updateSaved,
+} from "./redux/reducers/visitorSlice/VisitorProductSlice";
+import useLocalStoage from "./hooks/localStorage/useLocalStoage";
 
 function App() {
-  const { isAuthenticated } = useSelector(
-    (state) => state.auth
-  );
-  const { error, errorMessage } = useSelector((state) => state.visitor.data );
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { error, errorMessage } = useSelector((state) => state.visitor.data);
+  const { localState } = useLocalStoage();
 
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      dispatch(updateCart(localState?.cart || []));
+      dispatch(updateSaved(localState?.saved || []));
+    }
+  }, [dispatch, isAuthenticated, localState?.cart, localState?.saved]);
 
   return (
     <>

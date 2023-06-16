@@ -7,16 +7,16 @@ import useVisitorCart from "../../hooks/product/useVisitorCart";
 
 const Card = ({ itemDetail, userProduct }) => {
   const { visitorAddToCart, visitorDeleteFromCart } = useVisitorCart();
-  const isPresent = userProduct.visitorProduct.find((el) => el.id === itemDetail.id);
+  const isPresent = userProduct.visitorCart.find((el) => el.id === itemDetail.id);
   const item = isPresent ? isPresent : itemDetail;
   const countVisible = item.count === 0;
 
   const addToCartHandler = () => {
-    visitorAddToCart(userProduct.visitorProduct, item);
+    visitorAddToCart(userProduct.visitorCart, item);
   };
 
   const DeleteFromCartHandler = () => {
-    visitorDeleteFromCart(userProduct.visitorProduct, item);
+    visitorDeleteFromCart(userProduct.visitorCart, item);
   };
 
   return (
