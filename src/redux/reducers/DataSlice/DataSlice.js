@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../../thunk/DataThunk";
 
-const visitorDataSlice = createSlice({
+const DataSlice = createSlice({
   name: "data",
   initialState: {
-    visitorData: [],
+    mainData: [],
     loading: false,
     error: false,
     errorMessage: "",
   },
   reducers: {
-    updateVistorData: (state, action) => {
-      state.visitorData = action.payload;
+    updateData: (state, action) => {
+      state.mainData = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -21,7 +21,7 @@ const visitorDataSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.visitorData = action.payload;
+        state.mainData = action.payload;
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.error = true;
@@ -31,6 +31,6 @@ const visitorDataSlice = createSlice({
   },
 });
 
-export const { updateVistorData } = visitorDataSlice.actions;
+export const { updateData } = DataSlice.actions;
 
-export default visitorDataSlice.reducer;
+export default DataSlice.reducer;

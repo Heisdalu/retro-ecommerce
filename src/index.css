@@ -12,6 +12,10 @@
 }
 
 @layer components {
+  .toasifyFont {
+    @apply font-Inter font-400;
+  }
+
   .authBtn {
     @apply bg-white text-black py-1 px-2 rounded-[6px] mx-auto font-700 active:bg-black active:text-white active:rounded-[6px];
   }
@@ -29,7 +33,7 @@
   }
 
   .addToCartBtn {
-    @apply w-100 p-1 rounded-[5px] self-end text-center border-1 active:bg-black active:text-white btn;
+    @apply w-100 p-1 h-[58px] rounded-[5px] self-end text-center border-1 active:bg-black active:text-white btn;
   }
 
   .btnDisabled:disabled {

@@ -1,17 +1,16 @@
 import NotSavedIcon from "../../assets/icons/NotSavedIcon";
 import SavedIcon from "../../assets/icons/SavedIcon";
 import PropTypes from "prop-types";
-import useVisitorCart from "../../hooks/product/useVisitorCart";
+import useCart from "../../hooks/product/useCart";
+import { updateSaved } from "../../redux/reducers/visitorSlice/VisitorDetailSlice";
 
-const Count = ({ userProduct, item }) => {
-  const { visitorSavedItem } = useVisitorCart();
-  const isSavedItemPresent = userProduct.visitorSaved.find(
-    (el) => el?.id === item?.id
-  );
+const Count = ({ userSavedData, item, userID, databaseID }) => {
+  const { SavedItem } = useCart();
+  const isSavedItemPresent = userSavedData.find((el) => el?.id === item?.id);
   const savedData = isSavedItemPresent ? isSavedItemPresent : item;
 
   const clickHandler = () => {
-    visitorSavedItem(userProduct.visitorSaved, savedData);
+    SavedItem(userSavedData, savedData, userID, updateSaved, databaseID);
   };
 
   return (
@@ -29,4 +28,7 @@ export default Count;
 Count.propTypes = {
   userProduct: PropTypes.object,
   item: PropTypes.object,
+  userSavedData: PropTypes.array,
+  userID: PropTypes.string,
+  databaseID: PropTypes.string,
 };

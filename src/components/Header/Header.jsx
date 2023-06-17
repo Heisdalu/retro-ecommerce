@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 const Header = ({ isAuthenticated }) => {
-  const cartData = useSelector((state) => state.visitor.product.visitorCart);
+  const cartData = useSelector(
+    (state) => state.visitor.visitorProduct.data.cart
+  );
+
 
   return (
     <header className="flex items-center p-1 py-[1.3rem] text-center border-b-1 sticky border-bc1 top-[0] z-[11] bg-white md:px-2">

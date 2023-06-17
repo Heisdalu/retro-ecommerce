@@ -4,7 +4,7 @@ import Plus from "../../assets/icons/Plus";
 import Delete from "../../assets/icons/Delete";
 import { formatNumber } from "../../helpers/FormatNumber";
 import PropTypes from "prop-types";
-import useVisitorCart from "../../hooks/product/useVisitorCart";
+import useVisitorCart from "../../hooks/product/useCart";
 
 const CartCard = ({ item, userCart }) => {
   const { visitorAddToCart, visitorDeleteFromCart } = useVisitorCart();

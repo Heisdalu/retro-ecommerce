@@ -3,11 +3,45 @@ import FavoriteList from "../../components/FavoriteList/FavoriteList";
 import CardList from "../../components/CardList/CardList";
 import Loading from "../../components/Loading/Loading";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import useIdentifier from "../../hooks/Identifier/useIdentifier";
+import { useEffect } from "react";
+import { updateID } from "../../redux/reducers/visitorSlice/VisitorDetailSlice";
+// import usefetchProduct from "../../hooks/fetchProduct/usefetchProduct";
+import { fetchGuestProduct } from "../../redux/thunk/guestProductThunk";
+import Card from "../../components/CardList/Card";
+import { GUESTS } from "../../constants/Types";
 
 const VisitorPage = () => {
-  const { visitorData, loading } = useSelector((state) => state.visitor.data);
-  const product = useSelector((state) => state.visitor.product);
+  const { mainData, loading } = useSelector((state) => state.data);
+  const product = useSelector((state) => state.visitor.visitorProduct.data);
+  const dispatch = useDispatch();
+
+  const { guestId } = useIdentifier();
+
+  const allCards = mainData.map((item) => (
+    <Card
+      key={item?.id}
+      itemDetail={item}
+      userProduct={product}
+      userID={guestId}
+      databaseID={GUESTS}
+    />
+  ));
+
+  useEffect(() => {
+    if (guestId) {
+      dispatch(updateID(guestId));
+    }
+  }, [dispatch, guestId]);
+
+  useEffect(() => {
+    if (guestId) {
+      dispatch(fetchGuestProduct(guestId));
+      console.log("fffff");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [guestId]);
 
   return (
     <div>
@@ -23,7 +57,7 @@ const VisitorPage = () => {
             <div>Please wait...</div>
           </div>
         )}
-        <CardList dataItem={visitorData} userProduct={product} />
+        <CardList>{allCards}</CardList>
       </div>
     </div>
   );

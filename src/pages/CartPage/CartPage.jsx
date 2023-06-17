@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const CartPage = () => {
-  const cartData = useSelector((state) => state.visitor.product.visitorCart);
+  const cartData = useSelector((state) => state.visitor.visitorCart);
 
   const data = cartData.map((el) => (
     <CartCard key={el.id} item={el} userCart={cartData} />
