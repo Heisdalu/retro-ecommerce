@@ -26,3 +26,10 @@ export const SavedItemHelper = (savedArr, item) => {
 
   return data;
 };
+
+export const userCartDetail = (databaseID, updateFunc) => {
+  return {
+    databaseID,
+    updateFunc,
+  };
+};

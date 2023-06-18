@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 const CartSummary = ({ totalPrice }) => {
   return (
-    <section className="bg-white px-1 w-100 fixed bottom-[0] rounded-[6px] md:sticky md:top-[197px] md:self-start">
+    <section className="z-[3] bg-white px-1 w-100 fixed bottom-[0] rounded-[6px] md:sticky md:top-[197px] md:self-start">
       <h1 className="border-b-1 py-0.5 text-0.75">CART SUMMARY</h1>
       <div className="grid grid-cols-[2fr_1fr] py-0.5">
         <h3 className="text-0.875">Subtotal</h3>

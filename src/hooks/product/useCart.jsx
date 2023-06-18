@@ -13,6 +13,7 @@ import { SuccessToast, FailedToast } from "../../helpers/Toast/Toast";
 const useCart = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [resolved, setResolved] = useState(false);
   const dispatch = useDispatch();
 
   const UpdateUserCartData = async (
@@ -31,9 +32,10 @@ const useCart = () => {
       });
       SuccessToast(message);
       dispatch(callback(data));
-      console.log(data);
+      setResolved(true);
     } catch (e) {
       setError(true);
+      setResolved(false);
       FailedToast("Failed to update. No/slow internet connection ");
     } finally {
       setLoading(false);
@@ -74,6 +76,12 @@ const useCart = () => {
     UpdateUserCartData(databaseID, userId, callback, data, message);
   };
 
+  const RemoveFromCart = (productArr, item, userId, callback, databaseID) => {
+    const data = productArr.filter((el) => el.id !== item.id);
+    const message = "Item removed from your cart";
+    UpdateUserCartData(databaseID, userId, callback, data, message);
+  };
+
   const SavedItem = (savedArr, item, userId, callback, databaseID) => {
     // const newsavedArr = item.saved
     const data = SavedItemHelper(savedArr, item);
@@ -83,13 +91,20 @@ const useCart = () => {
 
     UpdateUserSavedItem(databaseID, userId, callback, data, message);
   };
+  
+  const RemoveFromSaved = (savedArr, item) => {
+    const data = savedArr.filter((el) => el.id !== item.id);
+    console.log(data);
+  };
 
   return {
     loading,
     error,
+    resolved,
     addToCart,
     DeleteFromCart,
     SavedItem,
+    RemoveFromCart,
   };
 };
 export default useCart;
