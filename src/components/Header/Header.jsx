@@ -5,10 +5,14 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 const Header = ({ isAuthenticated }) => {
-  const cartData = useSelector(
-    (state) => state.visitor.visitorProduct.data.cart
+  const visitorcartData = useSelector(
+    (state) => state.visitor.data.cart
   );
+  const activeCartData = useSelector((state) => state.activeUser.data.cart);
 
+  const cartInfo = isAuthenticated
+    ? activeCartData.length
+    : visitorcartData.length;
 
   return (
     <header className="flex items-center p-1 py-[1.3rem] text-center border-b-1 sticky border-bc1 top-[0] z-[11] bg-white md:px-2">
@@ -35,9 +39,9 @@ const Header = ({ isAuthenticated }) => {
         </Link>
       )}
       <Link to="cart" className="ml-auto md:ml-[0] relative">
-        {!(cartData.length === 0) && (
+        {!(cartInfo === 0) && (
           <div className="font-Inter font-400 absolute top-[-15px] right-[0] bg-gray text-white text-0.75 rounded-[50%] w-[20px] h-[20px] centerPos">
-            {cartData.length}
+            {cartInfo}
           </div>
         )}
         <CartIcon />

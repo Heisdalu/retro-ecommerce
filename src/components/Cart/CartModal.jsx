@@ -5,20 +5,19 @@ import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
 import { useEffect } from "react";
 
-const CartModal = ({
-  toggleFunc,
-  cartData,
-  userItem,
-  userId,
-  type,
-  callback,
-}) => {
+const CartModal = ({ toggleFunc, cartData, userItem, userId, userDetail }) => {
   const { RemoveFromCart, loading, error, resolved } = useCart();
 
   console.log(resolved);
   const removeItemHandler = () => {
     console.log(loading, error);
-    RemoveFromCart(cartData, userItem, userId, callback, type);
+    RemoveFromCart(
+      cartData,
+      userItem,
+      userId,
+      userDetail.updateFunc,
+      userDetail.databaseID
+    );
   };
 
   const exitModal = () => {
@@ -26,10 +25,10 @@ const CartModal = ({
   };
 
   useEffect(() => {
-    if (resolved) {
+    if (resolved || error) {
       toggleFunc();
     }
-  }, [resolved, toggleFunc]);
+  }, [error, resolved, toggleFunc]);
 
   return (
     <>
@@ -38,7 +37,7 @@ const CartModal = ({
         onClick={exitModal}
       ></div>
       <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-[21] w-100 max-w-[500px] px-1 animateDiv">
-        <div className="  p-1 rounded-[6px] bg-white border-1">
+        <div className="  p-1 rounded-[6px] bg-white">
           <div className="flex">
             <h1 className="text-[1.25rem]">Remove from cart</h1>
             <button className="ml-auto" onClick={exitModal}>
@@ -82,6 +81,5 @@ CartModal.propTypes = {
   cartData: PropTypes.array,
   userItem: PropTypes.object,
   userId: PropTypes.string,
-  type: PropTypes.string,
-  callback: PropTypes.func,
+  userDetail: PropTypes.object,
 };

@@ -2,14 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchGuestProduct } from "../../thunk/guestProductThunk";
 
 const initialState = {
-  visitorId: null,
-  visitorProduct: {
-    data: {
-      cart: [],
-      saved: [],
-    },
-    error: false,
+  data: {
+    cart: [],
+    saved: [],
   },
+  error: false,
+  loading: false,
 };
 
 const visitorDetailSlice = createSlice({
@@ -17,27 +15,28 @@ const visitorDetailSlice = createSlice({
   initialState: initialState,
   reducers: {
     updateVisitorCart: (state, action) => {
-      state.visitorProduct.data.cart = action.payload;
+      state.data.cart = action.payload;
     },
     updateSaved: (state, action) => {
-      state.visitorProduct.data.saved = action.payload;
-    },
-    updateID: (state, action) => {
-      state.visitorId = action.payload;
+      state.data.saved = action.payload;
     },
   },
   extraReducers: (builders) => {
     builders
+      .addCase(fetchGuestProduct.pending, (state) => {
+        state.loading = true;
+      })
       .addCase(fetchGuestProduct.fulfilled, (state, action) => {
-        state.visitorProduct.data = action.payload;
-        state.visitorProduct.error = false;
+        state.data = action.payload;
+        state.error = false;
+        state.loading = false;
       })
       .addCase(fetchGuestProduct.rejected, (state) => {
-        state.visitorProduct.error = true;
+        state.error = true;
+        state.loading = false;
       });
   },
 });
 
-export const { updateVisitorCart, updateSaved, updateID } =
-  visitorDetailSlice.actions;
+export const { updateVisitorCart, updateSaved } = visitorDetailSlice.actions;
 export default visitorDetailSlice.reducer;

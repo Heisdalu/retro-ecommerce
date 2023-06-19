@@ -15,7 +15,7 @@ const useIdentifier = () => {
     }
   }, [stored]);
 
-  return { guestId };
+  return guestId;
 };
 
 export default useIdentifier;

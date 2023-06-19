@@ -87,7 +87,7 @@ const useCart = () => {
     const data = SavedItemHelper(savedArr, item);
     const message = item.saved
       ? "Item removed from your wishlist"
-      : "Item added to your wishlist succesfully";
+      : "Item added to your wishlist";
 
     UpdateUserSavedItem(databaseID, userId, callback, data, message);
   };

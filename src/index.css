@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (hover: hover) {
-  /* when hover is supported */
-  .btn:hover {
-    color: #ffffff;
-    background: #1f1f1fab;
-    transition: all 500ms;
-  }
-}
-
 @layer components {
   .toasifyFont {
     @apply font-Inter font-400;
@@ -36,6 +27,10 @@
     @apply w-100 p-1 h-[58px] rounded-[5px] self-end text-center border-1 active:bg-black active:text-white btn;
   }
 
+  .cardBtn:disabled {
+    @apply opacity-[0.5];
+  }
+
   .btnDisabled:disabled {
     background-color: #e0e0e0;
     opacity: 0.5;
@@ -43,5 +38,40 @@
 
   .btnDisabled:active {
     @apply bg-[#87cefa];
+  }
+
+  @media (hover: hover) {
+    /* when hover is supported */
+    .btn:hover {
+      color: #ffffff;
+      background: #1f1f1fab;
+      transition: all 500ms;
+    }
+
+    .cartbtn:hover {
+      opacity: 0.5;
+      border-color: rgba(0, 0, 0, 0.673);
+    }
+
+    .cartbtn:active {
+      opacity: 0.8;
+      border-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .animateDiv {
+      /* opacity: 0.5; */
+      opacity: 0;
+      animation: myAnim 500ms ease 0s 1 normal forwards;
+    }
+
+    @keyframes myAnim {
+      0% {
+        opacity: 0.5;
+      }
+
+      100% {
+        opacity: 1;
+      }
+    }
   }
 }

@@ -12,17 +12,32 @@ import MainPage from "./pages/MainPage/MainPage";
 import { useEffect } from "react";
 import { fetchData } from "./redux/thunk/DataThunk";
 import { useDispatch } from "react-redux";
-
+import { fetchGuestProduct } from "./redux/thunk/guestProductThunk";
+import useIdentifier from "./hooks/Identifier/useIdentifier";
+import { fetchActiveUserProduct } from "./redux/thunk/activeUserProductThunk";
+import useAuthObserver from "./hooks/auth/useAuthObserver";
 
 function App() {
   const dispatch = useDispatch();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, userAuthDetail } = useSelector(
+    (state) => state.auth
+  );
   const { error, errorMessage } = useSelector((state) => state.data);
+
+  const guestId = useIdentifier();
+  useAuthObserver();
 
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      dispatch(fetchGuestProduct(guestId));
+    } else {
+      dispatch(fetchActiveUserProduct(userAuthDetail.uid));
+    }
+  }, [dispatch, guestId, isAuthenticated, userAuthDetail.uid]);
 
   return (
     <>
@@ -41,13 +56,20 @@ function App() {
       />
       <div className="bg-white relative">
         <Header isAuthenticated={isAuthenticated} />
+        
 
         {!error && (
           <div>
             <Routes>
               <Route
                 path="/"
-                element={isAuthenticated ? <MainPage /> : <VisitorPage />}
+                element={
+                  isAuthenticated ? (
+                    <MainPage userId={userAuthDetail.uid} />
+                  ) : (
+                    <VisitorPage userId={guestId} />
+                  )
+                }
               />
               <Route
                 path="/login"
@@ -57,7 +79,15 @@ function App() {
                 path="/sign-up"
                 element={<SignUp isAuthenticated={isAuthenticated} />}
               />
-              <Route path="/Cart" element={<CartPage />} />
+              <Route
+                path="/Cart"
+                element={
+                  <CartPage
+                    userId={guestId}
+                    isAuthenticated={isAuthenticated}
+                  />
+                }
+              />
               <Route path="*" element={<ErrorPage text="Page not found" />} />
             </Routes>
           </div>

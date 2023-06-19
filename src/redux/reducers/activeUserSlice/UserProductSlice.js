@@ -1,25 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserProduct } from "../../thunk/UserProductThunk";
+// import { fetchUserProduct } from "../../thunk/UserProductThunk";
+import { fetchActiveUserProduct } from "../../thunk/activeUserProductThunk";
 
 const userProductSlice = createSlice({
   name: "userProduct",
   initialState: {
     loading: false,
-    data: {},
+    data: { cart: [], saved: [] },
     error: false,
     errorMessage: "",
   },
-  reducers: {},
+  reducers: {
+    updateActiveUserCart: (state, action) => {
+      state.data.cart = action.payload;
+    },
+    updateActiveUserSaved: (state, action) => {
+      state.data.saved = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserProduct.pending, (state) => {
-        state.loading = "true";
+      .addCase(fetchActiveUserProduct.pending, (state) => {
+        state.loading = true;
       })
-      .addCase(fetchUserProduct.fulfilled, (state, action) => {
+      .addCase(fetchActiveUserProduct.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
       })
-      .addCase(fetchUserProduct.rejected, (state, action) => {
+      .addCase(fetchActiveUserProduct.rejected, (state, action) => {
         state.error = true;
         state.loading = false;
         state.errorMessage = action.error.message;
@@ -27,5 +35,6 @@ const userProductSlice = createSlice({
   },
 });
 
-
+export const { updateActiveUserCart, updateActiveUserSaved } =
+  userProductSlice.actions;
 export default userProductSlice.reducer;

@@ -16,6 +16,7 @@ export default {
       mg: "#ffffff0d",
       re: "#ffffff26",
       cartBg: "#e4e4e5",
+      mo: "#00000080",
     },
     fontFamily: {
       Inter: ["Inter, sans-serif"],

@@ -45,7 +45,13 @@ const CartCard = ({
   return (
     <article className="grid grid-cols-[1fr_2fr] [grid-gap:1rem] p-0.5 bg-white rounded-[6px] md:p-1">
       <div className="">
-        <img src={item.image} alt="" />
+        <img
+          src={item.image}
+          alt=""
+          width="123px"
+          height="128px"
+          style={{ width: "100%", height: "auto" }}
+        />
       </div>
       <div>
         <h3 className="text-0.875">{item?.title}</h3>
