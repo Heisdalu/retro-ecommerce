@@ -7,6 +7,10 @@
     @apply font-Inter font-400;
   }
 
+  .none {
+    @apply hidden;
+  }
+
   .authBtn {
     @apply bg-white text-black py-1 px-2 rounded-[6px] mx-auto font-700 active:bg-black active:text-white active:rounded-[6px];
   }
@@ -38,6 +42,38 @@
 
   .btnDisabled:active {
     @apply bg-[#87cefa];
+  }
+
+  .animateHeight {
+    animation: heightAnim 1s linear 0s 1 normal forwards;
+  }
+
+  @keyframes heightAnim {
+    0% {
+      max-height: 0;
+      overflow: hidden;
+    }
+
+    100% {
+      max-height: 100%;
+      overflow: none;
+    }
+  }
+
+  .offAnimateHeight {
+    max-height: 0;
+    animation: offheightAnim 500ms linear 0s 1 normal forwards;
+  }
+
+  @keyframes offheightAnim {
+    0% {
+      max-height: 100%;
+    }
+
+    100% {
+      max-height: 0;
+      overflow: hidden;
+    }
   }
 
   @media (hover: hover) {
@@ -72,6 +108,12 @@
       100% {
         opacity: 1;
       }
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .none {
+      display: flex!important;
     }
   }
 }

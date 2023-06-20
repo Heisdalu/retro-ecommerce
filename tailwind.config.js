@@ -65,6 +65,7 @@ export default {
       bx2: "rgba(0, 0, 0, 0.075) 0px 1px 1px inset",
       fx1: "rgba(0, 0, 0, 0.075) 0px 1px 1px inset, rgba(102, 175, 233, 0.6) 0px 0px 8px",
       fx2: "0px 0px 3px 0px #ff0000",
+      gx1: "0px 55px 182px -28px rgba(32,33,32,0.75)",
     },
     extend: {
       colors: {

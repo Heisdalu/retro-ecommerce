@@ -16,6 +16,7 @@ import { fetchGuestProduct } from "./redux/thunk/guestProductThunk";
 import useIdentifier from "./hooks/Identifier/useIdentifier";
 import { fetchActiveUserProduct } from "./redux/thunk/activeUserProductThunk";
 import useAuthObserver from "./hooks/auth/useAuthObserver";
+import MobileHamburger from "./components/Hamburger/MobileHamburger";
 
 function App() {
   const dispatch = useDispatch();
@@ -55,8 +56,11 @@ function App() {
         toastClassName="toasifyFont "
       />
       <div className="bg-white relative">
-        <Header isAuthenticated={isAuthenticated} />
-        
+        <Header
+          isAuthenticated={isAuthenticated}
+          displayName={userAuthDetail?.displayName}
+        />
+        {/* <MobileHamburger /> */}
 
         {!error && (
           <div>
