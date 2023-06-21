@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
 const Plus = ({ style }) => {
+
+  
   return (
     <svg
       width="12"

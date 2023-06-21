@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Count from "./Count";
-import Plus from "../../assets/icons/Plus";
+import Plus from "../../assets/icons/PlusIcon";
 import Delete from "../../assets/icons/Delete";
 import { formatNumber } from "../../helpers/FormatNumber";
 import useCart from "../../hooks/product/useCart";
