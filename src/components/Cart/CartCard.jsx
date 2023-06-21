@@ -1,5 +1,5 @@
 // import pic from "../../assets/seven-min.jpg";
-import Remove from "../../assets/icons/remove";
+import Remove from "../../assets/icons/Remove";
 import Plus from "../../assets/icons/Plus";
 import Delete from "../../assets/icons/Delete";
 import { formatNumber } from "../../helpers/FormatNumber";

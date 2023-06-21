@@ -1,6 +1,6 @@
 import Close from "../../assets/icons/Close";
 import Loading from "../Loading/Loading";
-import Remove from "../../assets/icons/remove";
+import Remove from "../../assets/icons/Remove";
 import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
 import { useEffect } from "react";

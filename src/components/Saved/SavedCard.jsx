@@ -1,4 +1,4 @@
-import Remove from "../../assets/icons/remove";
+import Remove from "../../assets/icons/Remove";
 import PropTypes from "prop-types";
 import { formatNumber } from "../../helpers/FormatNumber";
 import useCart from "../../hooks/product/useCart";
