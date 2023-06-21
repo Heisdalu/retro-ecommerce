@@ -1,4 +1,4 @@
-import Close from "../../assets/icons/close";
+import Close from "../../assets/icons/Close";
 import Loading from "../Loading/Loading";
 import Remove from "../../assets/icons/remove";
 import PropTypes from "prop-types";
