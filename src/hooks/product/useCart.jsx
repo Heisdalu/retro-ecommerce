@@ -91,10 +91,12 @@ const useCart = () => {
 
     UpdateUserSavedItem(databaseID, userId, callback, data, message);
   };
-  
-  const RemoveFromSaved = (savedArr, item) => {
+
+  const RemoveFromSaved = (savedArr, item, userId, callback, databaseID) => {
     const data = savedArr.filter((el) => el.id !== item.id);
+    const message = "Item removed from wishlist";
     console.log(data);
+    UpdateUserSavedItem(databaseID, userId, callback, data, message);
   };
 
   return {
@@ -105,6 +107,7 @@ const useCart = () => {
     DeleteFromCart,
     SavedItem,
     RemoveFromCart,
+    RemoveFromSaved,
   };
 };
 export default useCart;

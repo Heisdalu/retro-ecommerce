@@ -11,27 +11,21 @@ import { updateActiveUserCart } from "../../redux/reducers/activeUserSlice/UserP
 import { GUESTS, USERS } from "../../constants/Types";
 import CartModal from "../../components/Cart/CartModal";
 import { useState } from "react";
-import useIdentifier from "../../hooks/Identifier/useIdentifier";
 import Loading from "../../components/Loading/Loading";
 
-const CartPage = ({ isAuthenticated }) => {
+const CartPage = ({ isAuthenticated, userId }) => {
   const { loading: guestLoading, data: guestData } = useSelector(
     (state) => state.visitor
   );
   const { loading: activeUserLoading, data: activeUserData } = useSelector(
     (state) => state.activeUser
   );
-  const activeUserId = useSelector((state) => state.auth.userAuthDetail.uid);
-  const guestId = useIdentifier();
 
   const loading = isAuthenticated ? activeUserLoading : guestLoading;
   const dataCart = isAuthenticated ? activeUserData.cart : guestData.cart;
-  const userId = isAuthenticated ? activeUserId : guestId;
   const userDetail = isAuthenticated
-    ? userCartDetail(USERS, updateActiveUserCart)
-    : userCartDetail(GUESTS, updateVisitorCart);
-
-  console.log(userDetail);
+    ? userCartDetail(userId, USERS, updateActiveUserCart)
+    : userCartDetail(userId, GUESTS, updateVisitorCart);
 
   const [toggle, setToggle] = useState(false);
   const [userItem, setUserItem] = useState({});
@@ -44,15 +38,12 @@ const CartPage = ({ isAuthenticated }) => {
     setUserItem(item);
   };
 
-  // console.log(userItem);
-
   const data = dataCart.map((el) => (
     <CartCard
       key={el.id}
       item={el}
       userCart={dataCart}
       userDetail={userDetail}
-      userId={userId}
       toggleFunc={toggleHandler}
       getUserFunc={getUserItem}
     />

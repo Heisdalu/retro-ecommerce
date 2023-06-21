@@ -7,21 +7,14 @@ import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
 import Loading from "../Loading/Loading";
 
-const CartCard = ({
-  item,
-  userCart,
-  userDetail,
-  userId,
-  toggleFunc,
-  getUserFunc,
-}) => {
+const CartCard = ({ item, userCart, userDetail, toggleFunc, getUserFunc }) => {
   const { addToCart, DeleteFromCart, loading } = useCart();
 
   const increaseCartHandler = () => {
     addToCart(
       userCart,
       item,
-      userId,
+      userDetail.userId,
       userDetail.updateFunc,
       userDetail.databaseID
     );
@@ -31,7 +24,7 @@ const CartCard = ({
     DeleteFromCart(
       userCart,
       item,
-      userId,
+      userDetail.userId,
       userDetail.updateFunc,
       userDetail.databaseID
     );

@@ -6,8 +6,9 @@ import signUp from "../../assets/signup.png";
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import welcomePic from "../../assets/welcome.png";
-import savedPic from "../../assets/saved.png";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import SavedIcon from "../../assets/icons/SavedIcon";
 
 const MobileHamburger = forwardRef(({ toggleFunc }, ref) => {
   const { isAuthenticated, userAuthDetail } = useSelector(
@@ -39,10 +40,12 @@ const MobileHamburger = forwardRef(({ toggleFunc }, ref) => {
       <Link
         to="/saved"
         className="order-1 text-left py-0.5 px-1 flex items-center"
-         onClick={toggleFunc}
+        onClick={toggleFunc}
       >
-        <img src={savedPic} alt="" className="h-[18px] mr-0.5" />
-        Saved
+        <span className="mr-0.5">
+          <SavedIcon />
+        </span>
+        Wishlist
       </Link>
 
       {!isAuthenticated && (
@@ -79,3 +82,7 @@ const MobileHamburger = forwardRef(({ toggleFunc }, ref) => {
   );
 });
 export default MobileHamburger;
+
+MobileHamburger.propTypes = {
+  toggleFunc: PropTypes.func,
+};

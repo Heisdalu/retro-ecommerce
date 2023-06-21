@@ -22,12 +22,6 @@ const Header = ({ isAuthenticated, displayName }) => {
 
   const toggle = () => {
     divRef.current.classList.toggle("animateHeight");
-
-    if (divRef.current.classList.contains("animateHeight")) {
-      divRef.current.classList.remove("offAnimateHeight");
-    } else {
-      divRef.current.classList.add("offAnimateHeight");
-    }
   };
 
   const toggleHeader = () => {
@@ -52,7 +46,7 @@ const Header = ({ isAuthenticated, displayName }) => {
           </Link>
         )}
         {isAuthenticated && (
-          <div className="relative mr-[3rem]">
+          <div className="hidden relative mr-[3rem] md:block">
             <button
               className="hidden md:flex items-center hover:opacity-[0.5] active:opacity-[0.8]"
               onClick={toggleHeader}
@@ -91,5 +85,5 @@ export default Header;
 
 Header.propTypes = {
   isAuthenticated: PropTypes.bool,
-  displayName: PropTypes.array,
+  displayName: PropTypes.string,
 };

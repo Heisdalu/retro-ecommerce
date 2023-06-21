@@ -27,8 +27,9 @@ export const SavedItemHelper = (savedArr, item) => {
   return data;
 };
 
-export const userCartDetail = (databaseID, updateFunc) => {
+export const userCartDetail = (userId, databaseID, updateFunc) => {
   return {
+    userId,
     databaseID,
     updateFunc,
   };

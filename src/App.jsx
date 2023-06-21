@@ -16,7 +16,7 @@ import { fetchGuestProduct } from "./redux/thunk/guestProductThunk";
 import useIdentifier from "./hooks/Identifier/useIdentifier";
 import { fetchActiveUserProduct } from "./redux/thunk/activeUserProductThunk";
 import useAuthObserver from "./hooks/auth/useAuthObserver";
-import MobileHamburger from "./components/Hamburger/MobileHamburger";
+import SavedPage from "./pages/Savedpage/SavedPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -87,8 +87,17 @@ function App() {
                 path="/Cart"
                 element={
                   <CartPage
-                    userId={guestId}
+                    userId={isAuthenticated ? userAuthDetail.uid : guestId}
                     isAuthenticated={isAuthenticated}
+                  />
+                }
+              />
+              <Route
+                path="/saved"
+                element={
+                  <SavedPage
+                    isAuthenticated={isAuthenticated}
+                    userId={isAuthenticated ? userAuthDetail.uid : guestId}
                   />
                 }
               />
