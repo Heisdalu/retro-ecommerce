@@ -1,5 +1,3 @@
-/* eslint-disable react/prop-types */
-import CartCard from "../../components/Cart/CartCard";
 import EmptyCart from "../../components/Cart/EmptyCart";
 import CartSummary from "../../components/Cart/CartSummary";
 import CartList from "../../components/Cart/CartList";
@@ -12,6 +10,7 @@ import { GUESTS, USERS } from "../../constants/Types";
 import CartModal from "../../components/Cart/CartModal";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
+import PropTypes from "prop-types";
 
 const CartPage = ({ isAuthenticated, userId }) => {
   const { loading: guestLoading, data: guestData } = useSelector(
@@ -38,27 +37,10 @@ const CartPage = ({ isAuthenticated, userId }) => {
     setUserItem(item);
   };
 
-  const data = dataCart.map((el) => (
-    <CartCard
-      key={el.id}
-      item={el}
-      userCart={dataCart}
-      userDetail={userDetail}
-      toggleFunc={toggleHandler}
-      getUserFunc={getUserItem}
-    />
-  ));
-
   const totalPrice = dataCart.reduce(
     (acc, cur) => acc + cur.price * cur.count,
     0
   );
-
-  // useEffect(() => {
-  //   if (userId) {
-  //     dispatch(fetchGuestProduct(userId));
-  //   }
-  // }, [dispatch, userId]);
 
   if (loading)
     return (
@@ -80,7 +62,12 @@ const CartPage = ({ isAuthenticated, userId }) => {
         <div className="py-1 md:grid md:[grid-template-columns:1.5fr_1fr;] md:[grid-gap:1rem] md:max-w-[900px] md:mx-auto md:px-1">
           <CartSummary totalPrice={totalPrice} />
 
-          <CartList>{data}</CartList>
+          <CartList
+            userCart={dataCart}
+            userDetail={userDetail}
+            toggleFunc={toggleHandler}
+            getUserFunc={getUserItem}
+          />
         </div>
       </div>
       {toggle && (
@@ -98,3 +85,8 @@ const CartPage = ({ isAuthenticated, userId }) => {
   );
 };
 export default CartPage;
+
+CartPage.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  userId: PropTypes.string,
+};

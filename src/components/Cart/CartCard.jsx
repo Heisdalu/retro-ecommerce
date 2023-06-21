@@ -6,11 +6,23 @@ import { formatNumber } from "../../helpers/FormatNumber";
 import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
 import Loading from "../Loading/Loading";
+import { useEffect } from "react";
 
-const CartCard = ({ item, userCart, userDetail, toggleFunc, getUserFunc }) => {
+const CartCard = ({
+  item,
+  userCart,
+  userDetail,
+  toggleFunc,
+  getUserFunc,
+  activateDisable,
+  deactivateDisable,
+  disableState,
+}) => {
   const { addToCart, DeleteFromCart, loading } = useCart();
+  scrollTo(0, 0);
 
   const increaseCartHandler = () => {
+    activateDisable(item.id);
     addToCart(
       userCart,
       item,
@@ -21,6 +33,7 @@ const CartCard = ({ item, userCart, userDetail, toggleFunc, getUserFunc }) => {
   };
 
   const decreaseCartHandler = () => {
+    deactivateDisable(item.id);
     DeleteFromCart(
       userCart,
       item,
@@ -34,6 +47,12 @@ const CartCard = ({ item, userCart, userDetail, toggleFunc, getUserFunc }) => {
     toggleFunc();
     getUserFunc(item);
   };
+
+  useEffect(() => {
+    if (item.id === disableState.id && !loading) {
+      deactivateDisable();
+    }
+  }, [deactivateDisable, disableState, item.id, loading]);
 
   return (
     <article className="grid grid-cols-[1fr_2fr] [grid-gap:1rem] p-0.5 bg-white rounded-[6px] md:p-1">
@@ -55,17 +74,18 @@ const CartCard = ({ item, userCart, userDetail, toggleFunc, getUserFunc }) => {
       </div>
       <div className="mt-1 w-100 [grid-area:2/1/3/3] grid grid-cols-[1fr_1fr] items-center">
         <button
-          className="flex py-0.5 max-w-[150px] items-center font-500 font-Inter"
+          className="flex cardBtn py-0.5 max-w-[150px] items-center font-500 font-Inter"
           onClick={removeHandler}
+          disabled={disableState.state}
         >
           <span className="mr-0.5">
             <Remove />
           </span>
           REMOVE
         </button>
-        <div className="flex w-[150px] ml-auto items-center rounded-[4px]">
+        <div className="cardBtn flex w-[150px] ml-auto items-center rounded-[4px]">
           <button
-            disabled={item?.count === 1}
+            disabled={item?.count === 1 || disableState.state}
             onClick={decreaseCartHandler}
             className="border-1 z-0 rounded-[4px] w-[32px] h-[32px] flex justify-center centerPos btnDisabled"
           >
@@ -79,8 +99,9 @@ const CartCard = ({ item, userCart, userDetail, toggleFunc, getUserFunc }) => {
             )}
           </div>
           <button
-            className="border-1 w-[32px] h-[32px] centerPos rounded-[4px]"
+            className="cardBtn border-1 w-[32px] h-[32px] centerPos rounded-[4px]"
             onClick={increaseCartHandler}
+            disabled={disableState.state}
           >
             <Plus />
           </button>
@@ -98,4 +119,7 @@ CartCard.propTypes = {
   userId: PropTypes.string,
   getUserFunc: PropTypes.func,
   toggleFunc: PropTypes.func,
+  disableState: PropTypes.object,
+  activateDisable: PropTypes.func,
+  deactivateDisable: PropTypes.func,
 };
