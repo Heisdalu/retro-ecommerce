@@ -13,13 +13,12 @@ const AuthSlice = createSlice({
       state.isAuthenticated = true;
       state.userAuthDetail = action.payload.userCredential;
     },
-    // eslint-disable-next-line no-unused-vars
-    failed(state, _) {
+    reset(state) {
       state.isAuthenticated = false;
       state.userAuthDetail = {};
     },
   },
 });
 
-export const { success } = AuthSlice.actions;
+export const { success, reset } = AuthSlice.actions;
 export default AuthSlice.reducer;

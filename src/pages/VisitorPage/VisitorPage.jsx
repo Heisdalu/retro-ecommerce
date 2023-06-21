@@ -9,6 +9,7 @@ import { GUESTS } from "../../constants/Types";
 const VisitorPage = ({ userId }) => {
   const { loading } = useSelector((state) => state.data);
   const product = useSelector((state) => state.visitor.data);
+  const { mainData } = useSelector((state) => state.data);
 
   return (
     <div>
@@ -24,7 +25,12 @@ const VisitorPage = ({ userId }) => {
             <div>Please wait...</div>
           </div>
         )}
-        <CardList userProduct={product} userID={userId} databaseID={GUESTS} />
+        <CardList
+          mainData={mainData}
+          userProduct={product}
+          userID={userId}
+          databaseID={GUESTS}
+        />
       </div>
     </div>
   );

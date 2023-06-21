@@ -17,6 +17,7 @@ import useIdentifier from "./hooks/Identifier/useIdentifier";
 import { fetchActiveUserProduct } from "./redux/thunk/activeUserProductThunk";
 import useAuthObserver from "./hooks/auth/useAuthObserver";
 import SavedPage from "./pages/Savedpage/SavedPage";
+import SearchPage from "./pages/SearchedPage/SearchPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -60,7 +61,6 @@ function App() {
           isAuthenticated={isAuthenticated}
           displayName={userAuthDetail?.displayName}
         />
-        {/* <MobileHamburger /> */}
 
         {!error && (
           <div>
@@ -96,6 +96,16 @@ function App() {
                 path="/saved"
                 element={
                   <SavedPage
+                    isAuthenticated={isAuthenticated}
+                    userId={isAuthenticated ? userAuthDetail.uid : guestId}
+                  />
+                }
+              />
+
+              <Route
+                path="/search/:id"
+                element={
+                  <SearchPage
                     isAuthenticated={isAuthenticated}
                     userId={isAuthenticated ? userAuthDetail.uid : guestId}
                   />

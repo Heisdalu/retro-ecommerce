@@ -1,10 +1,8 @@
 import PropTypes from "prop-types";
 import Card from "./Card";
-import { useSelector } from "react-redux";
 import { useState } from "react";
 
-const CardList = ({ userProduct, userID, databaseID }) => {
-  const { mainData } = useSelector((state) => state.data);
+const CardList = ({ mainData, userProduct, userID, databaseID }) => {
   const [disableAll, setDisableAll] = useState({ id: "", state: false });
 
   const activateDisable = (itemId) => {
@@ -21,7 +19,6 @@ const CardList = ({ userProduct, userID, databaseID }) => {
       state: false,
     }));
   };
-
 
   const data = mainData.map((item) => (
     <Card
@@ -45,8 +42,8 @@ const CardList = ({ userProduct, userID, databaseID }) => {
 export default CardList;
 
 CardList.propTypes = {
-  children: PropTypes.node,
   userProduct: PropTypes.object,
   userID: PropTypes.string,
   databaseID: PropTypes.string,
+  mainData: PropTypes.array,
 };

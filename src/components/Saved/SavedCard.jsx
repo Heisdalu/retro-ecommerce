@@ -10,7 +10,6 @@ const SavedCard = ({ item, data, userDetail, userSavedFunc }) => {
   const { addToCart, loading, resolved, RemoveFromSaved } = useCart();
   const navigate = useNavigate();
 
-//   console.dir(userSavedFunc);
 
   const buyHandler = () => {
     addToCart(
@@ -84,4 +83,5 @@ SavedCard.propTypes = {
   item: PropTypes.object,
   userDetail: PropTypes.object,
   data: PropTypes.object,
+  userSavedFunc: PropTypes.func,
 };

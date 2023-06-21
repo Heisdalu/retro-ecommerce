@@ -12,6 +12,7 @@ import {
   updateVisitorCart,
   updateSaved,
 } from "../../redux/reducers/visitorSlice/VisitorDetailSlice";
+import PropTypes from "prop-types";
 
 const SavedPage = ({ isAuthenticated, userId }) => {
   const visitorData = useSelector((state) => state.visitor);
@@ -44,7 +45,7 @@ const SavedPage = ({ isAuthenticated, userId }) => {
     );
 
   return (
-    <div className="p-1 bg-white h-[calc(100vh-91px)] font-Inter md:max-w-[800px] md:mx-auto">
+    <div className="p-1 bg-white h-[calc(100vh-91px)] font-Inter md:max-w-[800px] md:mx-auto md:mt-1.5">
       <div className="flex items-center ">
         <h1 className="text-[1.2rem]">Saved ({genData.data.saved.length})</h1>
         <Link to="/" className="ml-1.5 bg-cartBg px-1 rounded-[10px] py-0.5">
@@ -67,3 +68,8 @@ const SavedPage = ({ isAuthenticated, userId }) => {
   );
 };
 export default SavedPage;
+
+SavedPage.propTypes = {
+  isAuthenticated: PropTypes.bool,
+  userId: PropTypes.string,
+};

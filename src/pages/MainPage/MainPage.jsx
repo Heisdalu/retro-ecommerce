@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 const MainPage = ({ userId }) => {
   const activeUserData = useSelector((state) => state.activeUser.data);
   const { loading } = useSelector((state) => state.data);
+  const { mainData } = useSelector((state) => state.data);
 
   console.log("main");
   return (
@@ -26,6 +27,7 @@ const MainPage = ({ userId }) => {
           </div>
         )}
         <CardList
+          mainData={mainData}
           userProduct={activeUserData}
           userID={userId}
           databaseID={USERS}

@@ -7,7 +7,6 @@
     @apply font-Inter font-400;
   }
 
-
   .none {
     @apply hidden;
   }
@@ -18,6 +17,11 @@
 
   .centerPos {
     @apply flex justify-center items-center;
+  }
+
+  .wish svg {
+    height: 18px;
+    width: 18px;
   }
 
   .authInput {
@@ -62,12 +66,12 @@
   }
   @media (hover: hover) {
     .activeHover:active {
-    opacity: 0.8;
-  }
+      opacity: 0.8;
+    }
 
-  .activeHover:hover {
-    opacity: 0.5;
-  }
+    .activeHover:hover {
+      opacity: 0.5;
+    }
     /* when hover is supported */
     .btn:hover {
       color: #ffffff;
