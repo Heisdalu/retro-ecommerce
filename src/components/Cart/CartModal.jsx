@@ -8,9 +8,7 @@ import { useEffect } from "react";
 const CartModal = ({ toggleFunc, cartData, userItem, userId, userDetail }) => {
   const { RemoveFromCart, loading, error, resolved } = useCart();
 
-  console.log(resolved);
   const removeItemHandler = () => {
-    console.log(loading, error);
     RemoveFromCart(
       cartData,
       userItem,

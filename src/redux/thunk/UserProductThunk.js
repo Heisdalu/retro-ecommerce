@@ -16,7 +16,7 @@ export const fetchUserProduct = createAsyncThunk(
 
       return docSnap.data();
     } catch (e) {
-      console.log(e.message);
+
       if (e.message.includes("offline")) {
         throw new Error("No/slow internet connection. Try again");
       }

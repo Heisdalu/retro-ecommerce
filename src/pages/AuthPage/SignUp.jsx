@@ -23,7 +23,6 @@ const SignUp = ({ isAuthenticated }) => {
       initialValues: initialValues,
       validationSchema: SignUpValidation,
       onSubmit: (values) => {
-        console.log(values);
         signUp(
           values.firstname,
           values.lastname,

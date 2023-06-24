@@ -42,9 +42,6 @@ const Card = ({
     if (item.id === disableState.id && !loading) {
       deactivateDisable();
     }
-    // console.log(loading, disableState, item.id);
-    //   if (!loading) {
-    //   }
   }, [deactivateDisable, disableState, item.id, loading]);
 
   return (

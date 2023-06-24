@@ -56,7 +56,6 @@ const useCart = () => {
       });
       SuccessToast(message);
       dispatch(callback(data));
-      console.log(data);
     } catch (e) {
       FailedToast("Failed to update. No/slow internet connection ");
     } finally {
@@ -95,7 +94,6 @@ const useCart = () => {
   const RemoveFromSaved = (savedArr, item, userId, callback, databaseID) => {
     const data = savedArr.filter((el) => el.id !== item.id);
     const message = "Item removed from wishlist";
-    console.log(data);
     UpdateUserSavedItem(databaseID, userId, callback, data, message);
   };
 

@@ -26,7 +26,6 @@ const useLogin = () => {
       );
       setError(false);
     } catch (e) {
-      console.log(e.message);
       setError(true);
       if (e.message.includes("auth/user-not-found")) {
         return setErrorMesage("email does not exist");

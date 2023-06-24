@@ -22,7 +22,7 @@ const SearchPage = ({ isAuthenticated, userId }) => {
       el.title.toLocaleLowerCase().includes(id.toLocaleLowerCase()) ||
       el.group.toLocaleLowerCase().includes(id.toLocaleLowerCase())
   );
-  console.log(filterdata);
+
 
   if (filterdata.length === 0)
     return (

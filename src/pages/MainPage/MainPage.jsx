@@ -15,6 +15,7 @@ import { db } from "../../configs/firebase-config";
 import { updateActiveData } from "../../redux/reducers/activeUserSlice/UserProductSlice";
 import { updateVisitorData } from "../../redux/reducers/visitorSlice/VisitorDetailSlice";
 import { initial } from "../../constants/Types";
+import { FailedToast } from "../../helpers/Toast/Toast";
 
 const MainPage = ({ userId, guestId }) => {
   const activeUserData = useSelector((state) => state.activeUser.data);
@@ -33,7 +34,6 @@ const MainPage = ({ userId, guestId }) => {
         saved: transformSaveddata(saved, activeUserData.saved),
       };
 
-      console.log(mergedData);
       try {
         await Promise.allSettled([
           updateDoc(userRef, mergedData),
@@ -42,7 +42,7 @@ const MainPage = ({ userId, guestId }) => {
         dispatch(updateActiveData(mergedData));
         dispatch(updateVisitorData(initial));
       } catch (e) {
-        console.log(e);
+        FailedToast(e.message)
       }
     };
 
