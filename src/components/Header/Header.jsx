@@ -1,4 +1,4 @@
-import Ham from '../../assets/icons/Ham.jsx'
+import Ham from "../../assets/icons/Ham.jsx";
 import CartIcon from "../../assets/icons/CartIcon";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -30,9 +30,9 @@ const Header = ({ isAuthenticated, displayName }) => {
 
   return (
     <>
-      <header className="flex items-center p-1 py-[1.3rem] text-center border-b-1 sticky border-bc1 top-[0] z-[11] bg-white md:px-2">
+      <header className="flex items-center p-1 py-[1rem] text-center border-b-1 sticky border-bc1 top-[0] z-[11] bg-white md:px-2 md:py-1">
         <button className="md:hidden" onClick={toggle}>
-         <Ham />
+          <Ham />
         </button>
         <h1 className="w-[100%] font-700 text-2 md:mr-auto md:w-[auto]">
           <Link to="/">RETRO</Link>

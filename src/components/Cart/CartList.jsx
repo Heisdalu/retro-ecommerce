@@ -21,7 +21,7 @@ const CartList = ({ userCart, userDetail, toggleFunc, getUserFunc }) => {
    };
 
   return (
-    <section className="min-h-[calc(100vh-165px)] p-1 md:[grid-area:2/1/1/2] pb-[15rem] md:pt-[0] md:px-[0] md:pb-[2rem]">
+    <section className="min-h-[calc(100vh-188px)] p-1 md:[grid-area:2/1/1/2] pb-[15rem] md:pt-[0] md:px-[0] md:pb-[2rem]">
       <div className="grid [grid-gap:1rem]">
         {userCart.map((el) => (
           <CartCard

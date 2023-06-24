@@ -34,3 +34,32 @@ export const userCartDetail = (userId, databaseID, updateFunc) => {
     updateFunc,
   };
 };
+
+export const transformCartData = (guestArr, mainArr) => {
+  const main = mainArr.map((el) => el.id);
+  const notPresent = guestArr.filter((el) => !main.includes(el.id));
+
+  const calc = (item) => {
+    const uniqueGuest = guestArr.find((el) => el.id == item.id);
+    if (uniqueGuest) return uniqueGuest.count + item.count;
+    return 1;
+  };
+
+  const data = mainArr.map((el) =>
+    guestArr.some((re) => re.id === el.id)
+      ? {
+          ...el,
+          count: calc(el),
+        }
+      : el
+  );
+
+  return [...data, ...notPresent];
+};
+
+export const transformSaveddata = (guestArr, mainArr) => {
+  const main = mainArr.map((el) => el.id);
+  const notPresent = guestArr.filter((el) => !main.includes(el.id));
+
+  return [...mainArr, ...notPresent];
+};

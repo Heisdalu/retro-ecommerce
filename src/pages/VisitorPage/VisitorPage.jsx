@@ -14,7 +14,7 @@ const VisitorPage = ({ userId }) => {
   return (
     <div>
       <div>
-        <div className="sticky top-[91px] z-[11] bg-white md:static">
+        <div className="sticky top-[81px] z-[11] bg-white md:static">
           <SearchBar />
           <FavoriteList />
         </div>

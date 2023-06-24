@@ -4,9 +4,17 @@ import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import SavedIcon from "../../assets/icons/SavedIcon";
+import useLogOut from "../../hooks/auth/useLogOut";
 
 // eslint-disable-next-line react/display-name
 const HeaderModal = forwardRef((props, ref) => {
+  const { LogOut } = useLogOut();
+
+  const logoutHandler = () => {
+    props.toggleHeader();
+    LogOut();
+  };
+
   return (
     <div
       className="hidden w-[150px] mt-[3px] md:hidden flex-col absolute top-[100%] left-[-10px] bg-white rounded-[4px] shadow-gx1 "
@@ -33,7 +41,7 @@ const HeaderModal = forwardRef((props, ref) => {
       </Link>
       <button
         className="font-Inter font-400 ml-0.5 mb-0.5 text-left p-0.5 flex items-center hover:opacity-[0.5] active:opacity-[0.8]"
-        onClick={props.toggleHeader}
+        onClick={logoutHandler}
       >
         <img src={logOutPic} alt="" className="h-[18px] mr-0.5" />
         Log out

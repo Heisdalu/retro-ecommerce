@@ -20,6 +20,9 @@ const visitorDetailSlice = createSlice({
     updateSaved: (state, action) => {
       state.data.saved = action.payload;
     },
+    updateVisitorData: (state, action) => {
+      state.data = action.payload;
+    },
   },
   extraReducers: (builders) => {
     builders
@@ -38,5 +41,6 @@ const visitorDetailSlice = createSlice({
   },
 });
 
-export const { updateVisitorCart, updateSaved } = visitorDetailSlice.actions;
+export const { updateVisitorCart, updateSaved, updateVisitorData } =
+  visitorDetailSlice.actions;
 export default visitorDetailSlice.reducer;

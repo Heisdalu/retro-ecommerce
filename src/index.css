@@ -38,6 +38,7 @@
 
   .cardBtn:disabled {
     @apply opacity-[0.5];
+    cursor: not-allowed;
   }
 
   .btnDisabled:disabled {

@@ -69,7 +69,7 @@ function App() {
                 path="/"
                 element={
                   isAuthenticated ? (
-                    <MainPage userId={userAuthDetail.uid} />
+                    <MainPage userId={userAuthDetail.uid} guestId={guestId} />
                   ) : (
                     <VisitorPage userId={guestId} />
                   )

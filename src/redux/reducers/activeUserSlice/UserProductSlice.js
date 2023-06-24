@@ -9,6 +9,7 @@ const userProductSlice = createSlice({
     data: { cart: [], saved: [] },
     error: false,
     errorMessage: "",
+    resolved: false,
   },
   reducers: {
     updateActiveUserCart: (state, action) => {
@@ -17,17 +18,25 @@ const userProductSlice = createSlice({
     updateActiveUserSaved: (state, action) => {
       state.data.saved = action.payload;
     },
+    updateActiveData: (state, action) => {
+      state.data = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(fetchActiveUserProduct.pending, (state) => {
         state.loading = true;
+        state.resolved = false;
+        state.error = false;
+        state.errorMessage = "";
       })
       .addCase(fetchActiveUserProduct.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
+        state.resolved = true;
       })
       .addCase(fetchActiveUserProduct.rejected, (state, action) => {
+        state.resolved = false;
         state.error = true;
         state.loading = false;
         state.errorMessage = action.error.message;
@@ -35,6 +44,6 @@ const userProductSlice = createSlice({
   },
 });
 
-export const { updateActiveUserCart, updateActiveUserSaved } =
+export const { updateActiveUserCart, updateActiveUserSaved, updateActiveData } =
   userProductSlice.actions;
 export default userProductSlice.reducer;

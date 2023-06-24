@@ -24,7 +24,7 @@ const SearchBar = () => {
             type="search"
             name="search"
             id="search"
-            className="border-1 border-solid border-bc1 rounded-rxl outline-none px-0.5 w-[90%] text-1 py-1 md:w-[400px]"
+            className="border-1 border-solid border-bc1 rounded-l-[4px] border-r-[0] outline-none px-0.5 w-[90%] text-1 py-1 md:w-[400px]"
             autoComplete="off"
             value={value}
             onChange={(e) => {

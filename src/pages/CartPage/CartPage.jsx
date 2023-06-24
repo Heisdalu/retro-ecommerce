@@ -52,7 +52,7 @@ const CartPage = ({ isAuthenticated, userId }) => {
   return (
     <div>
       <div className="bg-cartBg font-Inter relative">
-        <div className="z-[3] py-1 flex items-center space-x-1.5 px-1 bg-cartBg md:py-2 md:max-w-[900px] md:mx-auto sticky top-[90px]">
+        <div className="z-[3] py-1 flex items-center space-x-1.5 px-1 bg-cartBg md:py-2 md:max-w-[900px] md:mx-auto sticky top-[81px]">
           <h1 className="">Cart ({dataCart.length})</h1>
           <Link to="/" className="py-0.5 px-1 border-1 rounded-[10px] bg-white">
             Continue Shopping
