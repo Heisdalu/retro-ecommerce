@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import InputForm from "../../components/Form/InputForm";
 import { SuccessToast, FailedToast } from "../../helpers/Toast/Toast";
@@ -17,6 +17,7 @@ const intialObj = {
 const Login = ({ isAuthenticated }) => {
   const { Login, error, errorMessage, loading } = useLogin();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { handleBlur, handleSubmit, values, handleChange, touched, errors } =
     useFormik({
@@ -28,17 +29,16 @@ const Login = ({ isAuthenticated }) => {
     });
 
   useEffect(() => {
+    const from = location.state?.from || "/";
     if (isAuthenticated) {
       SuccessToast("Logged in successfully");
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
+      navigate(from);
     }
 
     if (error) {
       FailedToast(errorMessage);
     }
-  }, [error, errorMessage, isAuthenticated, navigate]);
+  }, [error, errorMessage, isAuthenticated, location, navigate]);
 
   return (
     <div className="bg-white h-[calc(100vh-90px)] flex justify-center items-center">

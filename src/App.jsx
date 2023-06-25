@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "./components/Header/Header";
 import Login from "./pages/AuthPage/Login";
@@ -18,6 +18,8 @@ import { fetchActiveUserProduct } from "./redux/thunk/activeUserProductThunk";
 import useAuthObserver from "./hooks/auth/useAuthObserver";
 import SavedPage from "./pages/Savedpage/SavedPage";
 import SearchPage from "./pages/SearchedPage/SearchPage";
+import Checkout from "./pages/CheckOutPage/Checkout";
+import ProtectedRoute from "./components/Protected/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +27,7 @@ function App() {
     (state) => state.auth
   );
   const { error, errorMessage } = useSelector((state) => state.data);
+  const location = useLocation();
 
   const guestId = useIdentifier();
   useAuthObserver();
@@ -57,10 +60,12 @@ function App() {
         toastClassName="toasifyFont "
       />
       <div className="bg-white relative">
-        <Header
-          isAuthenticated={isAuthenticated}
-          displayName={userAuthDetail?.displayName}
-        />
+        {!location.pathname.includes("/checkout") && (
+          <Header
+            isAuthenticated={isAuthenticated}
+            displayName={userAuthDetail?.displayName}
+          />
+        )}
 
         {!error && (
           <div>
@@ -109,6 +114,15 @@ function App() {
                     isAuthenticated={isAuthenticated}
                     userId={isAuthenticated ? userAuthDetail.uid : guestId}
                   />
+                }
+              />
+
+              <Route
+                path="/checkout"
+                element={
+                  <ProtectedRoute isAuthenticated={isAuthenticated}>
+                    <Checkout />
+                  </ProtectedRoute>
                 }
               />
               <Route path="*" element={<ErrorPage text="Page not found" />} />
