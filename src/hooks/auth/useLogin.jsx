@@ -20,7 +20,6 @@ const useLogin = () => {
             uid: response.user.uid,
             email: response.user.email,
             displayName: response.user.displayName,
-            accessToken: response.user.accessToken,
           },
         })
       );
