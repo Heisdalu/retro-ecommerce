@@ -6,3 +6,6 @@ export const initial = {
   saved: [],
   cart: [],
 };
+
+export const apiKey =
+  "pk_test_51NNFnOK5Sjd8uV5aNkOflrNuwxxxafbTpvAkxh0T3VJe4FhszhBokgm7oRVn2IVuXNYRHNB2X60e6U4FvsOAZfGX00hvfzMK3g";
