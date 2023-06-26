@@ -35,9 +35,7 @@ const SignUp = ({ isAuthenticated }) => {
   useEffect(() => {
     if (isAuthenticated) {
       SuccessToast("Logged in successfully");
-      setTimeout(() => {
-        navigate("/");
-      }, 500);
+      navigate("/");
     }
 
     if (error) {

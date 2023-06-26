@@ -135,7 +135,7 @@ const Checkout = () => {
                 Postal code
               </label>
               <input
-                type="text"
+                type="number"
                 name="postalCode"
                 id="postalCode"
                 maxLength="5"
@@ -155,14 +155,16 @@ const Checkout = () => {
           <h1 className="text-1.5 font-500 md:text-center mb-1 ">
             Payment method
           </h1>
-          <p className="font-Inter font-700">You are paying: ₦ {formatNumber(price)}</p>
+          <p className="font-Inter font-700">
+            You are paying: ₦ {formatNumber(price)}
+          </p>
           <div className="flex flex-col space-y-[4px] mt-1">
             <label htmlFor="cardNumber" className="text-0.875 font-500">
               Card Number
             </label>
             <div className="relative">
               <input
-                type="text"
+                type="number"
                 name="cardNumber"
                 id="cardNumber"
                 maxLength="16"
@@ -189,7 +191,7 @@ const Checkout = () => {
               </label>
               <div className="grid grid-cols-2 [grid-gap:1rem]">
                 <input
-                  type="text"
+                  type="number"
                   name="expirationMonth"
                   id="expirationMonth"
                   onBlur={handleBlur}
@@ -200,7 +202,7 @@ const Checkout = () => {
                   className="placeholder:text-0.875 md:placeholder:text-1 border-1 py-0.5 rounded-[6px] px-[7px] font-Inter cardBtn "
                 />
                 <input
-                  type="text"
+                  type="number"
                   name="expirationYear"
                   id="expirationYear"
                   onBlur={handleBlur}
@@ -243,6 +245,7 @@ const Checkout = () => {
           </div>
           <button
             onClick={handleSubmit}
+            type="submit"
             className="my-2 w-[200px] h-[56px] mx-auto py-1 text-white bg-black rounded-[6px]"
           >
             Place Order

@@ -32,7 +32,7 @@ const MobileHamburger = forwardRef(({ toggleFunc }, ref) => {
           <div className="flex items-center px-1 pt-1.5">
             <img src={pic} alt="" className="h-[25px] mr-0.5" />
             <h1 className="text-[1.1rem] font-Inter font-500">
-              Hi, {userAuthDetail?.displayName.split(" ")[0]}
+              Hi, {userAuthDetail?.displayName}
             </h1>
           </div>
         )}
@@ -70,6 +70,7 @@ const MobileHamburger = forwardRef(({ toggleFunc }, ref) => {
 
         {!isAuthenticated && (
           <Link
+            to="/sign-up"
             className="text-left py-0.5 px-1 flex items-center pb-1.5"
             onClick={toggleFunc}
           >

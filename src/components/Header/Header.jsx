@@ -53,7 +53,7 @@ const Header = ({ isAuthenticated, displayName }) => {
             >
               <img src={pic} alt="" className="h-[25px] mr-0.5" />
               <h1 className="text-[1rem] font-Inter font-500">
-                Hi, {displayName.split(" ")[0]}
+                Hi, {displayName}
               </h1>
               <img src={downPic} alt="" className="h-[18px] ml-[10px]" />
             </button>
