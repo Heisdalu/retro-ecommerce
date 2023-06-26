@@ -106,7 +106,7 @@ const SignUp = ({ isAuthenticated }) => {
           </div>
           {
             <button
-              className="centerPos authBtn my-[2rem] mx-auto flex bg-black text-white h-[56px] w-[123px]"
+              className="centerPos authBtn my-[2rem] mx-auto flex bg-black text-white h-[56px] w-[153px]"
               type="submit"
               disabled={loading}
             >

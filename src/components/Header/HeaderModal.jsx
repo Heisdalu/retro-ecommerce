@@ -1,5 +1,4 @@
 import logOutPic from "../../assets/logoutPic.png";
-import orderPic from "../../assets/orders.png";
 import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -30,14 +29,6 @@ const HeaderModal = forwardRef((props, ref) => {
           <SavedIcon />
         </div>
         <span>Wishlist</span>
-      </Link>
-      <Link
-        to="/orders"
-        className="ml-0.5 flex p-0.5 items-center hover:opacity-[0.5] active:opacity-[0.8] font-Inter font-400"
-        onClick={props.toggleHeader}
-      >
-        <img src={orderPic} alt="" className="h-[18px] mr-0.5" />
-        Orders
       </Link>
       <button
         className="font-Inter font-400 ml-0.5 mb-0.5 text-left p-0.5 flex items-center hover:opacity-[0.5] active:opacity-[0.8]"
