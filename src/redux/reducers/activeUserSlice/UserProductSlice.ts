@@ -1,24 +1,36 @@
-import { createSlice } from "@reduxjs/toolkit";
-// import { fetchUserProduct } from "../../thunk/UserProductThunk";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { fetchActiveUserProduct } from "../../thunk/activeUserProductThunk";
+import { userProductSliceTypes } from "../../../@types/redux/index";
+import { initialTypes, productDetail } from "../../../@types";
+
+interface userProductSlicePayloadTypes {
+  cart: productDetail[];
+  saved: productDetail[];
+}
+
+const initial_state: userProductSliceTypes = {
+  loading: false,
+  data: { cart: [], saved: [] },
+  error: false,
+  errorMessage: "",
+  resolved: false,
+};
 
 const userProductSlice = createSlice({
   name: "userProduct",
-  initialState: {
-    loading: false,
-    data: { cart: [], saved: [] },
-    error: false,
-    errorMessage: "",
-    resolved: false,
-  },
+  initialState: initial_state,
   reducers: {
-    updateActiveUserCart: (state, action) => {
+    updateActiveUserCart: (state, action: PayloadAction<productDetail[]>) => {
       state.data.cart = action.payload;
     },
-    updateActiveUserSaved: (state, action) => {
+    updateActiveUserSaved: (state, action: PayloadAction<productDetail[]>) => {
       state.data.saved = action.payload;
     },
-    updateActiveData: (state, action) => {
+    updateActiveData: (
+      state,
+      action: PayloadAction<userProductSlicePayloadTypes>
+    ) => {
+      console.log(action.payload);
       state.data = action.payload;
     },
   },
@@ -39,7 +51,8 @@ const userProductSlice = createSlice({
         state.resolved = false;
         state.error = true;
         state.loading = false;
-        state.errorMessage = action.error.message;
+        state.errorMessage =
+          action.error.message || "An unknown error occurred";
       });
   },
 });

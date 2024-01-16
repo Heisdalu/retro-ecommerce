@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
-import { Component } from "react";
+import { Component, ReactNode } from "react";
 
-class ErrorBoundary extends Component {
-  constructor(props) {
+interface BoundaryTypes {
+  children: ReactNode;
+}
+
+interface BoundaryState {
+  hasError: boolean;
+}
+class ErrorBoundary extends Component<BoundaryTypes, BoundaryState> {
+  constructor(props: BoundaryTypes) {
     super(props);
     this.state = { hasError: false };
   }
 
-  static GetDerivedStateFromError(error) {
+  static GetDerivedStateFromError(error: boolean) {
+    console.log(error);
     return { hasError: true };
   }
 
