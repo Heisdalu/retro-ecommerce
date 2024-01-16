@@ -26,11 +26,17 @@ const intialObj = {
 const validation = (values) => {
   const errors = {};
 
-  if (values.cardNumber.length === 0 || values.cardNumber.length !== 16) {
+  if (
+    values.cardNumber.length === 0 ||
+    values.cardNumber.toString().length !== 16
+  ) {
     errors.cardNumber = "Maximum of 16 characters ";
   }
 
-  if (values.postalCode.length === 0 || values.postalCode.length !== 5) {
+  if (
+    values.postalCode.length === 0 ||
+    values.postalCode.toString().length !== 5
+  ) {
     errors.postalCode = "Input a valid postal code";
   }
 
@@ -50,11 +56,11 @@ const validation = (values) => {
     errors.expirationYear = "Required";
   }
 
-  if (values.expirationYear.length !== 2) {
+  if (values.expirationYear.toString().length !== 2) {
     errors.expirationYear = "Maximum of 2 characters on year";
   }
 
-  if (values.cvv.length !== 3) {
+  if (values.cvv.toString().length !== 3) {
     errors.cvv = "Maximum of 3 characters";
   }
 
