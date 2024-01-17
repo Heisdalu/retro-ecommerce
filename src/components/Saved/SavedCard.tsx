@@ -1,15 +1,27 @@
 import Remove from "../../assets/icons/Remove";
-import PropTypes from "prop-types";
 import { formatNumber } from "../../helpers/FormatNumber";
 import useCart from "../../hooks/product/useCart";
 import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
+import { initialTypes, productDetail, userCartDetailType } from "../../@types";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
-const SavedCard = ({ item, data, userDetail, userSavedFunc }) => {
+interface SavedCardProps {
+  item: productDetail;
+  data: initialTypes;
+  userDetail: ReturnType<userCartDetailType>;
+  userSavedFunc: ActionCreatorWithPayload<productDetail[]>;
+}
+
+const SavedCard: FC<SavedCardProps> = ({
+  item,
+  data,
+  userDetail,
+  userSavedFunc,
+}) => {
   const { addToCart, loading, resolved, RemoveFromSaved } = useCart();
   const navigate = useNavigate();
-
 
   const buyHandler = () => {
     addToCart(
@@ -78,10 +90,3 @@ const SavedCard = ({ item, data, userDetail, userSavedFunc }) => {
   );
 };
 export default SavedCard;
-
-SavedCard.propTypes = {
-  item: PropTypes.object,
-  userDetail: PropTypes.object,
-  data: PropTypes.object,
-  userSavedFunc: PropTypes.func,
-};

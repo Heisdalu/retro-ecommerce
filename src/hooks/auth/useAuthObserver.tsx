@@ -14,9 +14,8 @@ const useAuthObserver = () => {
           success({
             userCredential: {
               uid: user.uid,
-              email: user.email,
-              displayName: user.displayName,
-              accessToken: user.accessToken,
+              email: user.email!,
+              displayName: user.displayName!,
             },
           })
         );

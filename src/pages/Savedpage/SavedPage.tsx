@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { Link } from "react-router-dom";
 import SavedCard from "../../components/Saved/SavedCard";
 import { useSelector } from "react-redux";
@@ -12,11 +13,16 @@ import {
   updateVisitorCart,
   updateSaved,
 } from "../../redux/reducers/visitorSlice/VisitorDetailSlice";
-import PropTypes from "prop-types";
+import { RootState } from "../../redux";
 
-const SavedPage = ({ isAuthenticated, userId }) => {
-  const visitorData = useSelector((state) => state.visitor);
-  const activeUserData = useSelector((state) => state.activeUser);
+interface SavedPageProps {
+  isAuthenticated: boolean;
+  userId: string;
+}
+
+const SavedPage: FC<SavedPageProps> = ({ isAuthenticated, userId }) => {
+  const visitorData = useSelector((state: RootState) => state.visitor);
+  const activeUserData = useSelector((state: RootState) => state.activeUser);
 
   const genData = isAuthenticated ? activeUserData : visitorData;
 
@@ -69,7 +75,3 @@ const SavedPage = ({ isAuthenticated, userId }) => {
 };
 export default SavedPage;
 
-SavedPage.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  userId: PropTypes.string,
-};

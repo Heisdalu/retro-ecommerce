@@ -129,7 +129,9 @@ function App() {
                     userId={
                       isAuthenticated && "uid" in userAuthDetail
                         ? userAuthDetail.uid
-                        : guestId
+                        : typeof guestId === "string"
+                        ? guestId
+                        : ""
                     }
                   />
                 }
