@@ -1,6 +1,17 @@
-import PropTypes from "prop-types";
+import { FC, ChangeEvent, FocusEvent } from "react";
 
-const InputForm = ({
+interface InputFormProps {
+  label: string;
+  title: string;
+  inputType: string;
+  inputValue: string;
+  error: string | undefined;
+  touched: boolean | undefined;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: FocusEvent) => void;
+}
+
+const InputForm: FC<InputFormProps> = ({
   label,
   title,
   inputType,
@@ -32,13 +43,3 @@ const InputForm = ({
 };
 export default InputForm;
 
-InputForm.propTypes = {
-  label: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  inputType: PropTypes.string.isRequired,
-  inputValue: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  error: PropTypes.string,
-  touched: PropTypes.bool,
-};

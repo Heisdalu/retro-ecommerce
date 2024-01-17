@@ -7,14 +7,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LoginValidate } from "../../validations/LoginValidation";
 import useLogin from "../../hooks/auth/useLogin";
-import PropTypes from "prop-types";
 
 const intialObj = {
   email: "",
   password: "",
 };
 
-const Login = ({ isAuthenticated }) => {
+const Login = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
   const { Login, error, errorMessage, loading } = useLogin();
   const navigate = useNavigate();
   const location = useLocation();
@@ -99,7 +98,3 @@ const Login = ({ isAuthenticated }) => {
 };
 
 export default Login;
-
-Login.propTypes = {
-  isAuthenticated: PropTypes.bool,
-};

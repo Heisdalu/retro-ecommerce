@@ -22,6 +22,9 @@ import Checkout from "./pages/CheckOutPage/Checkout";
 import ProtectedRoute from "./components/Protected/ProtectedRoute";
 import { RootState, AppDispatch } from "./redux";
 
+// check userLogin hook
+// made changes there
+
 function App() {
   const dispatch = useDispatch<AppDispatch>();
   const { isAuthenticated, userAuthDetail } = useSelector(

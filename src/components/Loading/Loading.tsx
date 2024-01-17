@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 const Loading = ({ color = "#fff", style = "" }) => {
   return (
     <svg
@@ -32,8 +30,3 @@ const Loading = ({ color = "#fff", style = "" }) => {
   );
 };
 export default Loading;
-
-Loading.propTypes = {
-  color: PropTypes.string,
-  style: PropTypes.string,
-};
