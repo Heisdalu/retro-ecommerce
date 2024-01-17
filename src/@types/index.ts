@@ -73,3 +73,11 @@ export interface errorCheckOutFomrikValueType {
   expirationYear?: string;
   cvv?: string;
 }
+export interface touchedCheckOutFomrikValueType {
+  country?: boolean;
+  postalCode?: boolean;
+  cardNumber?: boolean;
+  expirationMonth?: boolean;
+  expirationYear?: boolean;
+  cvv?: boolean;
+}
