@@ -1,7 +1,6 @@
 import errorImg from "../../assets//icons/errorAnimal.svg";
-import PropTypes from "prop-types";
 
-const ErrorPage = ({ text }) => {
+const ErrorPage = ({ text }: { text: string }) => {
   return (
     <div className="flex flex-col justify-center p-1">
       <div>
@@ -19,7 +18,3 @@ const ErrorPage = ({ text }) => {
   );
 };
 export default ErrorPage;
-
-ErrorPage.propTypes = {
-  text: PropTypes.string,
-};
