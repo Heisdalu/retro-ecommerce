@@ -21,3 +21,6 @@ export interface userCart_SavedTypes {
   cart: productDetail[];
   saved: productDetail[];
 }
+export interface isAuthenticatedTypes {
+  isAuthenticated: boolean;
+}

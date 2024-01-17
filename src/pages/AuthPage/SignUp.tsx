@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { SignUpValidation } from "../../validations/SignUpValidation";
@@ -8,6 +7,7 @@ import useSignUp from "../../hooks/auth/useSignUp";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
 import { SuccessToast, FailedToast } from "../../helpers/Toast/Toast";
+import { isAuthenticatedTypes } from "../../@types";
 
 const initialValues = {
   firstname: "",
@@ -15,7 +15,7 @@ const initialValues = {
   email: "",
   password: "",
 };
-const SignUp = ({ isAuthenticated }) => {
+const SignUp = ({ isAuthenticated }: isAuthenticatedTypes) => {
   const navigate = useNavigate();
   const { signUp, loading, error, errorMessage } = useSignUp();
   const { handleSubmit, handleBlur, handleChange, errors, values, touched } =
@@ -130,6 +130,3 @@ const SignUp = ({ isAuthenticated }) => {
 
 export default SignUp;
 
-SignUp.propTypes = {
-  isAuthenticated: PropTypes.bool,
-};

@@ -7,13 +7,14 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { LoginValidate } from "../../validations/LoginValidation";
 import useLogin from "../../hooks/auth/useLogin";
+import { isAuthenticatedTypes } from "../../@types";
 
 const intialObj = {
   email: "",
   password: "",
 };
 
-const Login = ({ isAuthenticated }: { isAuthenticated: boolean }) => {
+const Login = ({ isAuthenticated }: isAuthenticatedTypes) => {
   const { Login, error, errorMessage, loading } = useLogin();
   const navigate = useNavigate();
   const location = useLocation();

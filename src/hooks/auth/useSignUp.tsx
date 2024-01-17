@@ -13,7 +13,12 @@ const useSignUp = () => {
   const [errorMessage, setErrorMesage] = useState("");
   const dispatch = useDispatch();
 
-  const signUp = async (firstname, lastname, email, password) => {
+  const signUp = async (
+    firstname: string,
+    lastname: string,
+    email: string,
+    password: string
+  ) => {
     setLoading(true);
     try {
       const response = await createUserWithEmailAndPassword(
@@ -24,7 +29,7 @@ const useSignUp = () => {
 
       if (response.user) {
         //update user firstname and lastname
-        await updateProfile(auth.currentUser, {
+        await updateProfile(auth.currentUser!, {
           displayName: `${firstname} ${lastname}`,
         });
       }
@@ -36,20 +41,23 @@ const useSignUp = () => {
         success({
           userCredential: {
             uid: response.user.uid,
-            email: response.user.email,
-            displayName: response.user.displayName,
+            email: response.user.email!,
+            displayName: response.user.displayName!,
           },
         })
       );
 
       setError(false);
-    } catch (e) {
+    } catch (e: unknown) {
       setError(true);
-      if (e.message.includes("auth/email-already-in-use")) {
+      if (e instanceof Error && e.message.includes("auth/email-already-in-use")) {
         return setErrorMesage("Email already in use");
       }
 
-      if (e.message.includes("auth/network-request-failed")) {
+      if (
+        e instanceof Error &&
+        e.message.includes("auth/network-request-failed")
+      ) {
         return setErrorMesage(
           "Please check your internet connection and try again"
         );
