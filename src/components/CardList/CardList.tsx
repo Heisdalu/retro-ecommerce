@@ -1,18 +1,33 @@
-import PropTypes from "prop-types";
 import Card from "./Card";
-import { useState } from "react";
+import { FC, useState } from "react";
+import { disableAllType, initialTypes, productDetail, userStatusType } from "../../@types";
 
-const CardList = ({ mainData, userProduct, userID, databaseID }) => {
-  const [disableAll, setDisableAll] = useState({ id: "", state: false });
+interface CardListProps {
+  mainData: productDetail[];
+  userProduct: initialTypes;
+  userID: string;
+  databaseID: userStatusType;
+}
 
-  const activateDisable = (itemId) => {
+const CardList: FC<CardListProps> = ({
+  mainData,
+  userProduct,
+  userID,
+  databaseID,
+}) => {
+  const [disableAll, setDisableAll] = useState<disableAllType>({
+    id: "",
+    state: false,
+  });
+
+  const activateDisable = (itemId: string) => {
     setDisableAll((prev) => ({
       ...prev,
       id: itemId,
       state: true,
     }));
   };
-  const deactivateDisable = (itemId) => {
+  const deactivateDisable = (itemId?: string) => {
     setDisableAll((prev) => ({
       ...prev,
       id: itemId,
@@ -41,9 +56,3 @@ const CardList = ({ mainData, userProduct, userID, databaseID }) => {
 };
 export default CardList;
 
-CardList.propTypes = {
-  userProduct: PropTypes.object,
-  userID: PropTypes.string,
-  databaseID: PropTypes.string,
-  mainData: PropTypes.array,
-};

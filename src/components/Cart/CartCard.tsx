@@ -64,7 +64,7 @@ const CartCard: FC<CartCardProps> = ({
 
   const removeHandler = () => {
     toggleFunc();
-    console.log(item);
+    // console.log(item);
     getUserFunc(item);
   };
 

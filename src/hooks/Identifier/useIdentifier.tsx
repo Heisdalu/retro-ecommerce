@@ -4,7 +4,7 @@ import { RETRO_ID } from "../../constants/Types";
 
 const useIdentifier = () => {
   const stored = localStorage.getItem(RETRO_ID) || null;
-  const [guestId, setGuestId] = useState(stored);
+  const [guestId, setGuestId] = useState<string | null>(stored);
 
   useEffect(() => {
     if (!stored) {

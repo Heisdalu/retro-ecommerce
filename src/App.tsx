@@ -42,7 +42,7 @@ function App() {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      dispatch(fetchGuestProduct(guestId));
+      typeof guestId === "string" && dispatch(fetchGuestProduct(guestId));
     } else {
       dispatch(
         fetchActiveUserProduct(
@@ -92,7 +92,9 @@ function App() {
                       guestId={guestId}
                     />
                   ) : (
-                    <VisitorPage userId={guestId} />
+                    <VisitorPage
+                      userId={typeof guestId === "string" ? guestId : ""}
+                    />
                   )
                 }
               />
@@ -111,7 +113,9 @@ function App() {
                     userId={
                       isAuthenticated && "uid" in userAuthDetail
                         ? userAuthDetail.uid
-                        : guestId
+                        : typeof guestId === "string"
+                        ? guestId
+                        : ""
                     }
                     isAuthenticated={isAuthenticated}
                   />

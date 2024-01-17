@@ -2,14 +2,14 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import FavoriteList from "../../components/FavoriteList/FavoriteList";
 import CardList from "../../components/CardList/CardList";
 import Loading from "../../components/Loading/Loading";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { GUESTS } from "../../constants/Types";
+import { RootState } from "../../redux";
 
-const VisitorPage = ({ userId }) => {
-  const { loading } = useSelector((state) => state.data);
-  const product = useSelector((state) => state.visitor.data);
-  const { mainData } = useSelector((state) => state.data);
+const VisitorPage = ({ userId }: { userId: string }) => {
+  const { loading } = useSelector((state: RootState) => state.data);
+  const product = useSelector((state: RootState) => state.visitor.data);
+  const { mainData } = useSelector((state: RootState) => state.data);
 
   return (
     <div>
@@ -37,8 +37,3 @@ const VisitorPage = ({ userId }) => {
 };
 export default VisitorPage;
 
-VisitorPage.propTypes = {
-  data: PropTypes.array,
-  loading: PropTypes.bool,
-  userId: PropTypes.string,
-};

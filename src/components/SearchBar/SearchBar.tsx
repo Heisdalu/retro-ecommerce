@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = () => {
+const SearchBar: FC = () => {
   const [value, setValue] = useState("");
   const [off, setOff] = useState(true);
   const navigate = useNavigate();

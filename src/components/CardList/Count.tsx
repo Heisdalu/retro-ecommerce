@@ -1,11 +1,20 @@
 import NotSavedIcon from "../../assets/icons/NotSavedIcon";
 import SavedIcon from "../../assets/icons/SavedIcon";
-import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
 import { updateActiveUserSaved } from "../../redux/reducers/activeUserSlice/UserProductSlice";
 import { updateSaved } from "../../redux/reducers/visitorSlice/VisitorDetailSlice";
+import { productDetail, userStatusType } from "../../@types";
+import { FC } from "react";
 
-const Count = ({
+interface CountProps {
+  userSavedData: productDetail[];
+  item: productDetail;
+  userID: string;
+  databaseID: userStatusType;
+  isAuthenticated: boolean;
+}
+
+const Count: FC<CountProps> = ({
   userSavedData,
   item,
   userID,
@@ -33,11 +42,3 @@ const Count = ({
 };
 export default Count;
 
-Count.propTypes = {
-  userProduct: PropTypes.object,
-  item: PropTypes.object,
-  userSavedData: PropTypes.array,
-  userID: PropTypes.string,
-  databaseID: PropTypes.string,
-  isAuthenticated: PropTypes.bool,
-};

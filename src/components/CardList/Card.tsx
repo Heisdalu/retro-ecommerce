@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import Count from "./Count";
 import Plus from "../../assets/icons/PlusIcon";
 import Delete from "../../assets/icons/Delete";
@@ -8,9 +7,28 @@ import { updateVisitorCart } from "../../redux/reducers/visitorSlice/VisitorDeta
 import { updateActiveUserCart } from "../../redux/reducers/activeUserSlice/UserProductSlice";
 import Loading from "../Loading/Loading";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
+import {
+  activateDisableType,
+  deactivateDisableType,
+  disableAllType,
+  initialTypes,
+  productDetail,
+  userStatusType,
+} from "../../@types";
+import { RootState } from "../../redux";
 
-const Card = ({
+interface CardProps {
+  itemDetail: productDetail;
+  userProduct: initialTypes;
+  userID: string;
+  databaseID: userStatusType;
+  activateDisable: activateDisableType;
+  deactivateDisable: deactivateDisableType;
+  disableState: disableAllType;
+}
+
+const Card: FC<CardProps> = ({
   itemDetail,
   userProduct,
   userID,
@@ -19,7 +37,7 @@ const Card = ({
   deactivateDisable,
   disableState,
 }) => {
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const { addToCart, DeleteFromCart, loading } = useCart();
   const isPresent = userProduct.cart.find((el) => el.id === itemDetail.id);
   const item = isPresent ? isPresent : itemDetail;
@@ -111,17 +129,3 @@ const Card = ({
   );
 };
 export default Card;
-
-Card.propTypes = {
-  itemDetail: PropTypes.object,
-  image: PropTypes.string,
-  title: PropTypes.string,
-  price: PropTypes.number,
-  id: PropTypes.string,
-  userProduct: PropTypes.object,
-  userID: PropTypes.string,
-  databaseID: PropTypes.string,
-  disableState: PropTypes.object,
-  deactivateDisable: PropTypes.func,
-  activateDisable: PropTypes.func,
-};
