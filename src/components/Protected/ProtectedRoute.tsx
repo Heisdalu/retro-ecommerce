@@ -1,7 +1,12 @@
 import { useLocation, Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { FC, ReactNode } from "react";
 
-const ProtectedRoute = ({ children, isAuthenticated }) => {
+interface Props {
+  children: ReactNode;
+  isAuthenticated: boolean;
+}
+
+const ProtectedRoute: FC<Props> = ({ children, isAuthenticated }) => {
   const location = useLocation();
 
   if (!isAuthenticated) {
@@ -11,8 +16,3 @@ const ProtectedRoute = ({ children, isAuthenticated }) => {
   return children;
 };
 export default ProtectedRoute;
-
-ProtectedRoute.propTypes = {
-  children: PropTypes.node,
-  isAuthenticated: PropTypes.bool,
-};
