@@ -50,11 +50,16 @@ export const userCartDetail: userCartDetailType = (
   };
 };
 
-export const transformCartData = (guestArr, mainArr) => {
+// acccepts guestArr cart items and adds it to the user catolgue when the user is authenticated
+// transition from guest user to authenticated user updates your cart also
+export const transformCartData = (
+  guestArr: productDetail[],
+  mainArr: productDetail[]
+): productDetail[] => {
   const main = mainArr.map((el) => el.id);
   const notPresent = guestArr.filter((el) => !main.includes(el.id));
 
-  const calc = (item) => {
+  const calc = (item: productDetail) => {
     const uniqueGuest = guestArr.find((el) => el.id == item.id);
     if (uniqueGuest) return uniqueGuest.count + item.count;
     return 1;
@@ -72,7 +77,13 @@ export const transformCartData = (guestArr, mainArr) => {
   return [...data, ...notPresent];
 };
 
-export const transformSaveddata = (guestArr, mainArr) => {
+
+// acccepts guestArr saved items and adds it to the user catolgue when the user is authenticated
+// transition from guest user to authenticated user updates your saved item also
+export const transformSaveddata = (
+  guestArr: productDetail[],
+  mainArr: productDetail[]
+): productDetail[] => {
   const main = mainArr.map((el) => el.id);
   const notPresent = guestArr.filter((el) => !main.includes(el.id));
 

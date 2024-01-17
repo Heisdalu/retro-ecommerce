@@ -89,7 +89,7 @@ function App() {
                   isAuthenticated ? (
                     <MainPage
                       userId={"uid" in userAuthDetail ? userAuthDetail.uid : ""}
-                      guestId={guestId}
+                      guestId={typeof guestId === "string" ? guestId : ""}
                     />
                   ) : (
                     <VisitorPage
