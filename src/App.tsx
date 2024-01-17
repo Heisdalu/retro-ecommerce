@@ -20,13 +20,14 @@ import SavedPage from "./pages/Savedpage/SavedPage";
 import SearchPage from "./pages/SearchedPage/SearchPage";
 import Checkout from "./pages/CheckOutPage/Checkout";
 import ProtectedRoute from "./components/Protected/ProtectedRoute";
+import { RootState, AppDispatch } from "./redux";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const { isAuthenticated, userAuthDetail } = useSelector(
-    (state) => state.auth
+    (state: RootState) => state.auth
   );
-  const { error, errorMessage } = useSelector((state) => state.data);
+  const { error, errorMessage } = useSelector((state: RootState) => state.data);
   const location = useLocation();
 
   const guestId = useIdentifier();
@@ -40,8 +41,15 @@ function App() {
     if (!isAuthenticated) {
       dispatch(fetchGuestProduct(guestId));
     } else {
-      dispatch(fetchActiveUserProduct(userAuthDetail.uid));
+      dispatch(
+        fetchActiveUserProduct(
+          "uid" in userAuthDetail && userAuthDetail.uid
+            ? userAuthDetail.uid
+            : ""
+        )
+      );
     }
+    //@ts-ignore
   }, [dispatch, guestId, isAuthenticated, userAuthDetail.uid]);
 
   return (
@@ -63,7 +71,9 @@ function App() {
         {!location.pathname.includes("/checkout") && (
           <Header
             isAuthenticated={isAuthenticated}
-            displayName={userAuthDetail?.displayName}
+            displayName={
+              "displayName" in userAuthDetail ? userAuthDetail?.displayName : ""
+            }
           />
         )}
 
@@ -74,7 +84,10 @@ function App() {
                 path="/"
                 element={
                   isAuthenticated ? (
-                    <MainPage userId={userAuthDetail.uid} guestId={guestId} />
+                    <MainPage
+                      userId={"uid" in userAuthDetail ? userAuthDetail.uid : ""}
+                      guestId={guestId}
+                    />
                   ) : (
                     <VisitorPage userId={guestId} />
                   )
@@ -92,7 +105,11 @@ function App() {
                 path="/Cart"
                 element={
                   <CartPage
-                    userId={isAuthenticated ? userAuthDetail.uid : guestId}
+                    userId={
+                      isAuthenticated && "uid" in userAuthDetail
+                        ? userAuthDetail.uid
+                        : guestId
+                    }
                     isAuthenticated={isAuthenticated}
                   />
                 }
@@ -102,7 +119,11 @@ function App() {
                 element={
                   <SavedPage
                     isAuthenticated={isAuthenticated}
-                    userId={isAuthenticated ? userAuthDetail.uid : guestId}
+                    userId={
+                      isAuthenticated && "uid" in userAuthDetail
+                        ? userAuthDetail.uid
+                        : guestId
+                    }
                   />
                 }
               />
@@ -112,7 +133,11 @@ function App() {
                 element={
                   <SearchPage
                     isAuthenticated={isAuthenticated}
-                    userId={isAuthenticated ? userAuthDetail.uid : guestId}
+                    userId={
+                      isAuthenticated && "uid" in userAuthDetail
+                        ? userAuthDetail.uid
+                        : guestId
+                    }
                   />
                 }
               />

@@ -1,31 +1,40 @@
 import Ham from "../../assets/icons/Ham.jsx";
-import CartIcon from "../../assets/icons/CartIcon";
+import CartIcon from "../../assets/icons/CartIcon.jsx";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import MobileHamburger from "../Hamburger/MobileHamburger";
+import MobileHamburger from "../Hamburger/MobileHamburger.jsx";
 import { useRef } from "react";
 import pic from "../../assets/authIcon.png";
 import downPic from "../../assets/down.png";
-import HeaderModal from "./HeaderModal";
+import HeaderModal from "./HeaderModal.jsx";
+import { RootState } from "../../redux/index.js";
 
-const Header = ({ isAuthenticated, displayName }) => {
-  const visitorcartData = useSelector((state) => state.visitor.data.cart);
-  const activeCartData = useSelector((state) => state.activeUser.data.cart);
+interface HeaderProps {
+  isAuthenticated: boolean;
+  displayName: string;
+}
+
+const Header = ({ isAuthenticated, displayName }: HeaderProps) => {
+  const visitorcartData = useSelector(
+    (state: RootState) => state.visitor.data.cart
+  );
+  const activeCartData = useSelector(
+    (state: RootState) => state.activeUser.data.cart
+  );
 
   const cartInfo = isAuthenticated
     ? activeCartData.length
     : visitorcartData.length;
 
-  const divRef = useRef();
-  const headerRef = useRef();
+  const divRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
-  const toggle = () => {
-    divRef.current.classList.toggle("animateHeight");
+  const toggle = (): void => {
+    divRef.current && divRef.current.classList.toggle("animateHeight");
   };
 
-  const toggleHeader = () => {
-    headerRef.current.classList.toggle("none");
+  const toggleHeader = (): void => {
+    headerRef.current && headerRef.current.classList.toggle("none");
   };
 
   return (
@@ -82,8 +91,3 @@ const Header = ({ isAuthenticated, displayName }) => {
   );
 };
 export default Header;
-
-Header.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  displayName: PropTypes.string,
-};
