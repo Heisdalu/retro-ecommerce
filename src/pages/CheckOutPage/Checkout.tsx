@@ -13,8 +13,13 @@ import { USERS } from "../../constants/Types";
 import Loading from "../../components/Loading/Loading";
 import { useState } from "react";
 import { formatNumber } from "../../helpers/FormatNumber";
+import { AppDispatch, RootState } from "../../redux";
+import {
+  checkOutFomrikValueType,
+  errorCheckOutFomrikValueType,
+} from "../../@types";
 
-const intialObj = {
+const intialObj: checkOutFomrikValueType = {
   country: "",
   postalCode: "",
   cardNumber: "",
@@ -23,44 +28,44 @@ const intialObj = {
   cvv: "",
 };
 
-const validation = (values) => {
-  const errors = {};
+const validation = (values: checkOutFomrikValueType) => {
+  const errors: errorCheckOutFomrikValueType = {};
 
   if (
-    values.cardNumber.length === 0 ||
-    values.cardNumber.toString().length !== 16
+    !values.cardNumber ||
+    (values.cardNumber && values.cardNumber.toString().length !== 16)
   ) {
     errors.cardNumber = "Maximum of 16 characters ";
   }
 
-  if (
-    values.postalCode.length === 0 ||
-    values.postalCode.toString().length !== 5
-  ) {
+  if (!values.postalCode || values.postalCode.toString().length !== 5) {
     errors.postalCode = "Input a valid postal code";
   }
 
-  if (values.country.trim() === "") {
+  if (!values.country) {
     errors.country = "Required";
   }
 
-  if (values.expirationMonth.length === 0) {
+  if (!values.expirationMonth) {
     errors.expirationMonth = "Required";
   }
 
-  if (values.expirationMonth === 0 || values.expirationMonth > 12) {
+  if (
+    Number(values.expirationMonth) === 0 ||
+    (values.expirationMonth && Number(values.expirationMonth) > 12)
+  ) {
     errors.expirationMonth = "Input a valid month";
   }
 
-  if (values.expirationYear.length === 0) {
+  if (!values.expirationYear) {
     errors.expirationYear = "Required";
   }
 
-  if (values.expirationYear.toString().length !== 2) {
+  if (!values.expirationYear || values.expirationYear.toString().length !== 2) {
     errors.expirationYear = "Maximum of 2 characters on year";
   }
 
-  if (values.cvv.toString().length !== 3) {
+  if (!values.cvv || values.cvv.toString().length !== 3) {
     errors.cvv = "Maximum of 3 characters";
   }
 
@@ -68,9 +73,11 @@ const validation = (values) => {
 };
 
 const Checkout = () => {
-  const userDetail = useSelector((state) => state.auth.userAuthDetail);
-  const { cart } = useSelector((state) => state.activeUser.data);
-  const dispatch = useDispatch();
+  const userDetail = useSelector(
+    (state: RootState) => state.auth.userAuthDetail
+  );
+  const { cart } = useSelector((state: RootState) => state.activeUser.data);
+  const dispatch = useDispatch<AppDispatch>();
   const [click, setClicked] = useState(false);
   const navigate = useNavigate();
   const { touched, errors, handleBlur, handleChange, handleSubmit, values } =
@@ -79,9 +86,14 @@ const Checkout = () => {
       validate: validation,
       onSubmit: async () => {
         setClicked(true);
-        const docRef = doc(db, USERS, userDetail.uid);
+        const docRef = doc(
+          db,
+          USERS,
+          "uid" in userDetail ? userDetail.uid : ""
+        );
 
         try {
+          // @ts-ignore
           await updateDoc(docRef, initial);
           dispatch(updateActiveData(initial));
           SuccessToast("Order successfully placed");
@@ -110,7 +122,9 @@ const Checkout = () => {
                 id="name"
                 disabled={true}
                 className="border-1 py-0.5 rounded-[6px] px-[7px] font-Inter capitalize cardBtn"
-                value={userDetail.displayName}
+                value={
+                  "displayName" in userDetail ? userDetail.displayName : ""
+                }
               />
             </div>
             <div className="boder-1 flex flex-col space-y-[4px] md:w-100">
@@ -123,7 +137,7 @@ const Checkout = () => {
                 id="Email"
                 disabled={true}
                 className="border-1 py-0.5 rounded-[6px] px-[7px] font-Inter cardBtn"
-                value={userDetail.email}
+                value={"email" in userDetail ? userDetail.email : ""}
               />
             </div>
           </div>
@@ -144,10 +158,10 @@ const Checkout = () => {
                 type="number"
                 name="postalCode"
                 id="postalCode"
-                maxLength="5"
+                maxLength={5}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                value={values.postalCode}
+                value={values.postalCode!}
                 className="border-1 py-0.5 rounded-[6px] px-[7px] font-Inter cardBtn "
               />
               {touched.postalCode && (
@@ -173,7 +187,7 @@ const Checkout = () => {
                 type="number"
                 name="cardNumber"
                 id="cardNumber"
-                maxLength="16"
+                maxLength={16}
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.cardNumber}
@@ -204,7 +218,7 @@ const Checkout = () => {
                   onChange={handleChange}
                   value={values.expirationMonth}
                   placeholder="month"
-                  maxLength="2"
+                  maxLength={2}
                   className="placeholder:text-0.875 md:placeholder:text-1 border-1 py-0.5 rounded-[6px] px-[7px] font-Inter cardBtn "
                 />
                 <input
@@ -215,7 +229,7 @@ const Checkout = () => {
                   onChange={handleChange}
                   value={values.expirationYear}
                   placeholder="year"
-                  maxLength="2"
+                  maxLength={2}
                   className="placeholder:text-0.875 md:placeholder:text-1 border-1 py-0.5 rounded-[6px] px-[7px] font-Inter cardBtn "
                 />
               </div>
@@ -235,13 +249,13 @@ const Checkout = () => {
                 CVV
               </label>
               <input
-                type="text"
+                type="number"
                 name="cvv"
                 id="cvv"
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.cvv}
-                maxLength="3"
+                maxLength={3}
                 className="border-1 py-0.5 rounded-[6px] px-[7px] font-Inter cardBtn "
               />
               {touched.cvv && (
@@ -250,6 +264,8 @@ const Checkout = () => {
             </div>
           </div>
           <button
+            //@ts-ignore.. i cannot change it to a form for the formik type.. disrupts the entire checkout page...
+            // left it that way instead
             onClick={handleSubmit}
             type="submit"
             className="my-2 w-[200px] h-[56px] mx-auto py-1 text-white bg-black rounded-[6px]"

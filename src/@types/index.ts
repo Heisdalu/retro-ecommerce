@@ -56,3 +56,20 @@ export type combinedCartActionType = (
   callback: ActionCreatorWithPayload<productDetail[]>,
   databaseID: userStatusType
 ) => void;
+
+export interface checkOutFomrikValueType {
+  country: string;
+  postalCode: string;
+  cardNumber: string;
+  expirationMonth: string;
+  expirationYear: string;
+  cvv: string;
+}
+export interface errorCheckOutFomrikValueType {
+  country?: string;
+  postalCode?: string;
+  cardNumber?: string;
+  expirationMonth?: string;
+  expirationYear?: string;
+  cvv?: string;
+}
