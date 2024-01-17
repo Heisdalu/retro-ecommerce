@@ -30,7 +30,6 @@ const userProductSlice = createSlice({
       state,
       action: PayloadAction<userProductSlicePayloadTypes>
     ) => {
-      console.log(action.payload);
       state.data = action.payload;
     },
   },

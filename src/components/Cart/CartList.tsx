@@ -36,8 +36,6 @@ const CartList: FC<CardListProps> = ({
     }));
   };
   const deactivateDisable: deactivateDisableType = (itemId) => {
-    console.log(itemId);
-
     setDisableAll((prev) => ({
       ...prev,
       id: itemId,
