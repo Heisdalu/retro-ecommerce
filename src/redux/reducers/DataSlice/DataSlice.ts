@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchData } from "../../thunk/DataThunk";
 import { productDetail } from "../../../@types";
 
@@ -18,7 +18,7 @@ const DataSlice = createSlice({
     errorMessage: "",
   } as dataStateTypes,
   reducers: {
-    updateData: (state, action) => {
+    updateData: (state, action: PayloadAction<productDetail[]>) => {
       state.mainData = action.payload;
     },
   },

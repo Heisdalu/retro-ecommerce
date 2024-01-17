@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchGuestProduct } from "../../thunk/guestProductThunk";
-import { productDetail } from "../../../@types";
+import { initialTypes, productDetail } from "../../../@types";
 
 interface initialStateTypes {
   data: {
@@ -27,10 +27,10 @@ const visitorDetailSlice = createSlice({
     updateVisitorCart: (state, action: PayloadAction<productDetail[]>) => {
       state.data.cart = action.payload;
     },
-    updateSaved: (state, action) => {
+    updateSaved: (state, action: PayloadAction<productDetail[]>) => {
       state.data.saved = action.payload;
     },
-    updateVisitorData: (state, action) => {
+    updateVisitorData: (state, action: PayloadAction<initialTypes>) => {
       state.data = action.payload;
     },
   },
