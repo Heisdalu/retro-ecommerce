@@ -23,4 +23,3 @@ export const fetchData = createAsyncThunk<fetchDataThunkResponse, void>(
     }
   }
 );
-

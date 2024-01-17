@@ -1,7 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchGuestProduct } from "../../thunk/guestProductThunk";
+import { productDetail } from "../../../@types";
 
-const initialState = {
+interface initialStateTypes {
+  data: {
+    cart: productDetail[];
+    saved: productDetail[];
+  };
+  error: boolean;
+  loading: boolean;
+}
+
+const initialState: initialStateTypes = {
   data: {
     cart: [],
     saved: [],

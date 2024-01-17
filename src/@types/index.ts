@@ -16,3 +16,8 @@ export interface userCredentialTypes {
   email: string;
   displayName: string;
 }
+
+export interface userCart_SavedTypes {
+  cart: productDetail[];
+  saved: productDetail[];
+}
