@@ -4,6 +4,7 @@ import Remove from "../../assets/icons/Remove";
 import useCart from "../../hooks/product/useCart";
 import { FC, useEffect } from "react";
 import { productDetail, voidFuncType, userCartDetailType } from "../../@types";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 
 interface CardModalProps {
   toggleFunc: voidFuncType;
@@ -11,6 +12,8 @@ interface CardModalProps {
   cartData: productDetail[];
   userId: string;
   userDetail: ReturnType<userCartDetailType>;
+  type: string;
+  callback: ActionCreatorWithPayload<productDetail[]>;
 }
 
 const CartModal: FC<CardModalProps> = ({

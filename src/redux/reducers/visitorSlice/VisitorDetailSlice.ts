@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { fetchGuestProduct } from "../../thunk/guestProductThunk";
 import { productDetail } from "../../../@types";
 
@@ -24,7 +24,7 @@ const visitorDetailSlice = createSlice({
   name: "detail",
   initialState: initialState,
   reducers: {
-    updateVisitorCart: (state, action) => {
+    updateVisitorCart: (state, action: PayloadAction<productDetail[]>) => {
       state.data.cart = action.payload;
     },
     updateSaved: (state, action) => {
