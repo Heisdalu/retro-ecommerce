@@ -1,7 +1,7 @@
 // import InputForm from "../../components/Form/InputForm";
 import SelectForm from "../../components/Form/SelectForm";
 import visaPic from "../../assets/visa.png";
-import { useFormik } from "formik";
+import { FormikErrors, useFormik } from "formik";
 import { FailedToast, SuccessToast } from "../../helpers/Toast/Toast";
 import { useNavigate } from "react-router";
 import { initial } from "../../constants/Types";
@@ -29,7 +29,7 @@ const intialObj: checkOutFomrikValueType = {
 };
 
 const validation = (values: checkOutFomrikValueType) => {
-  const errors: errorCheckOutFomrikValueType = {};
+  const errors: FormikErrors<errorCheckOutFomrikValueType> = {};
 
   if (
     !values.cardNumber ||
@@ -81,7 +81,7 @@ const Checkout = () => {
   const [click, setClicked] = useState(false);
   const navigate = useNavigate();
   const { touched, errors, handleBlur, handleChange, handleSubmit, values } =
-    useFormik({
+    useFormik<checkOutFomrikValueType>({
       initialValues: intialObj,
       validate: validation,
       onSubmit: async () => {

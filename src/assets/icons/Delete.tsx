@@ -1,6 +1,4 @@
-import PropTypes from "prop-types";
-
-function Delete({ style }) {
+function Delete({ style = "#000" }) {
   return (
     <svg
       width="10"
@@ -29,11 +27,3 @@ function Delete({ style }) {
   );
 }
 export default Delete;
-
-Delete.defaultProps = {
-  style: "#000",
-};
-
-Delete.propTypes = {
-  style: PropTypes.string,
-};

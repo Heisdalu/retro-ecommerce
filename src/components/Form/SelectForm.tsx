@@ -1,7 +1,25 @@
+import { FormikProps } from "formik";
 import { countries } from "../../constants/countries";
-import PropTypes from "prop-types";
+import { checkOutFomrikValueType } from "../../@types";
+import { FC } from "react";
 
-const SelectForm = ({ touched, errors, handleChange, handleBlur, value }) => {
+interface Props {
+  value: string;
+}
+
+type SelectProps = FormikProps<checkOutFomrikValueType> & Props;
+
+const SelectForm: FC<any> = ({
+  touched,
+  errors,
+  handleChange,
+  handleBlur,
+  value,
+}) => {
+  // console.log(touched, errors, handleBlur, handleChange, value);
+
+  console.log(touched, errors);
+
   const all = countries.map((el) => (
     <option key={el} value={el} label={el}>
       {el}
@@ -31,11 +49,3 @@ const SelectForm = ({ touched, errors, handleChange, handleBlur, value }) => {
   );
 };
 export default SelectForm;
-
-SelectForm.propTypes = {
-  touched: PropTypes.object,
-  errors: PropTypes.object,
-  handleBlur: PropTypes.func,
-  handleChange: PropTypes.func,
-  value: PropTypes.string,
-};
