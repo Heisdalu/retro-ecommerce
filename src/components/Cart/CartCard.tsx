@@ -3,12 +3,32 @@ import Remove from "../../assets/icons/Remove";
 import Plus from "../../assets/icons/PlusIcon";
 import Delete from "../../assets/icons/Delete";
 import { formatNumber } from "../../helpers/FormatNumber";
-import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
 import Loading from "../Loading/Loading";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
+import {
+  productDetail,
+  userCartDetailType,
+  voidFuncType,
+  getUserFuncType,
+  disableAllType,
+  activateDisableType,
+  deactivateDisableType,
+} from "../../@types";
 
-const CartCard = ({
+interface CartCardProps {
+  item: productDetail;
+  userCart: productDetail[];
+  userDetail: ReturnType<userCartDetailType>;
+  toggleFunc: voidFuncType;
+  getUserFunc: getUserFuncType;
+  activateDisable: activateDisableType;
+  deactivateDisable: deactivateDisableType;
+  disableState: disableAllType;
+}
+
+scrollTo(0, 0);
+const CartCard: FC<CartCardProps> = ({
   item,
   userCart,
   userDetail,
@@ -19,7 +39,6 @@ const CartCard = ({
   disableState,
 }) => {
   const { addToCart, DeleteFromCart, loading } = useCart();
-  scrollTo(0, 0);
 
   const increaseCartHandler = () => {
     activateDisable(item.id);
@@ -45,6 +64,7 @@ const CartCard = ({
 
   const removeHandler = () => {
     toggleFunc();
+    console.log(item);
     getUserFunc(item);
   };
 
@@ -111,15 +131,3 @@ const CartCard = ({
   );
 };
 export default CartCard;
-
-CartCard.propTypes = {
-  item: PropTypes.object,
-  userCart: PropTypes.array,
-  userDetail: PropTypes.object,
-  userId: PropTypes.string,
-  getUserFunc: PropTypes.func,
-  toggleFunc: PropTypes.func,
-  disableState: PropTypes.object,
-  activateDisable: PropTypes.func,
-  deactivateDisable: PropTypes.func,
-};

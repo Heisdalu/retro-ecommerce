@@ -1,3 +1,5 @@
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+
 export interface productDetail {
   count: number;
   group: string;
@@ -24,3 +26,33 @@ export interface userCart_SavedTypes {
 export interface isAuthenticatedTypes {
   isAuthenticated: boolean;
 }
+
+export type userStatusType = "guests" | "users";
+
+export type userCartDetailType = (
+  userId: string,
+  databaseID: userStatusType,
+  updateFunc: ActionCreatorWithPayload<productDetail[]>
+) => {
+  userId: string;
+  databaseID: userStatusType;
+  updateFunc: ActionCreatorWithPayload<productDetail[]>;
+};
+
+export type voidFuncType = () => void;
+export type getUserFuncType = (e: productDetail) => void;
+export interface disableAllType {
+  id: string | undefined;
+  state: boolean;
+}
+
+export type activateDisableType = (itemId: string) => void;
+export type deactivateDisableType = (itemId?: string) => void;
+
+export type combinedCartActionType = (
+  productArr: productDetail[],
+  item: productDetail,
+  userId: string,
+  callback: ActionCreatorWithPayload<productDetail[]>,
+  databaseID: userStatusType
+) => void;

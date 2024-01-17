@@ -1,8 +1,7 @@
 import { formatNumber } from "../../helpers/FormatNumber";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 
-const CartSummary = ({ totalPrice }) => {
+const CartSummary = ({ totalPrice }: { totalPrice: number }) => {
   const navigate = useNavigate();
 
   const navigateHandler = () => {
@@ -30,7 +29,3 @@ const CartSummary = ({ totalPrice }) => {
 };
 
 export default CartSummary;
-
-CartSummary.propTypes = {
-  totalPrice: PropTypes.number,
-};

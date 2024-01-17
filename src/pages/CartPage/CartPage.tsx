@@ -11,33 +11,43 @@ import CartModal from "../../components/Cart/CartModal";
 import { useState } from "react";
 import Loading from "../../components/Loading/Loading";
 import PropTypes from "prop-types";
+import {
+  getUserFuncType,
+  isAuthenticatedTypes,
+  productDetail,
+  userCartDetailType,
+  voidFuncType,
+} from "../../@types";
+import { RootState } from "../../redux";
 
-const CartPage = ({ isAuthenticated, userId }) => {
+type CartPageProps = isAuthenticatedTypes & { userId: string };
+
+const CartPage = ({ isAuthenticated, userId }: CartPageProps) => {
   const { loading: guestLoading, data: guestData } = useSelector(
-    (state) => state.visitor
+    (state: RootState) => state.visitor
   );
   const { loading: activeUserLoading, data: activeUserData } = useSelector(
-    (state) => state.activeUser
+    (state: RootState) => state.activeUser
   );
 
   const loading = isAuthenticated ? activeUserLoading : guestLoading;
   const dataCart = isAuthenticated ? activeUserData.cart : guestData.cart;
-  const userDetail = isAuthenticated
+  const userDetail: ReturnType<userCartDetailType> = isAuthenticated
     ? userCartDetail(userId, USERS, updateActiveUserCart)
     : userCartDetail(userId, GUESTS, updateVisitorCart);
 
   const [toggle, setToggle] = useState(false);
-  const [userItem, setUserItem] = useState({});
+  const [userItem, setUserItem] = useState<productDetail | {}>({});
 
-  const toggleHandler = () => {
+  const toggleHandler: voidFuncType = () => {
     setToggle((prev) => !prev);
   };
 
-  const getUserItem = (item) => {
+  const getUserItem: getUserFuncType = (item) => {
     setUserItem(item);
   };
 
-  const totalPrice = dataCart.reduce(
+  const totalPrice: number = dataCart.reduce(
     (acc, cur) => acc + cur.price * cur.count,
     0
   );

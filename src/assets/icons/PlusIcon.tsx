@@ -1,8 +1,4 @@
-import PropTypes from "prop-types";
-
-const Plus = ({ style }) => {
-
-  
+const Plus = ({ style = "#000" }) => {
   return (
     <svg
       width="12"
@@ -19,11 +15,3 @@ const Plus = ({ style }) => {
   );
 };
 export default Plus;
-
-Plus.defaultProps = {
-  style: "#000",
-};
-
-Plus.propTypes = {
-  style: PropTypes.string,
-};

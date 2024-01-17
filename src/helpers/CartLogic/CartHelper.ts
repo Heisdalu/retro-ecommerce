@@ -1,4 +1,9 @@
-export const AddToCartHelper = (arr, item) => {
+import { productDetail, userCartDetailType } from "../../@types";
+
+export const AddToCartHelper = (
+  arr: productDetail[],
+  item: productDetail
+): productDetail[] => {
   const isItemPresent = arr.find((el) => el.id === item.id);
 
   const data = isItemPresent
@@ -8,8 +13,11 @@ export const AddToCartHelper = (arr, item) => {
   return data;
 };
 
-export const DeleteFromCartHelper = (arr, item) => {
-  const sameID = (val) => val.id === item.id;
+export const DeleteFromCartHelper = (
+  arr: productDetail[],
+  item: productDetail
+): productDetail[] => {
+  const sameID = (val: productDetail) => val.id === item.id;
   // delete item when count is 1 and operation is to be performed
   const data =
     item.count - 1 <= 0
@@ -19,7 +27,10 @@ export const DeleteFromCartHelper = (arr, item) => {
   return data;
 };
 
-export const SavedItemHelper = (savedArr, item) => {
+export const SavedItemHelper = (
+  savedArr: productDetail[],
+  item: productDetail
+): productDetail[] => {
   const data = item.saved
     ? savedArr.filter((el) => el.id !== item.id)
     : [...savedArr, { ...item, saved: true }];
@@ -27,7 +38,11 @@ export const SavedItemHelper = (savedArr, item) => {
   return data;
 };
 
-export const userCartDetail = (userId, databaseID, updateFunc) => {
+export const userCartDetail: userCartDetailType = (
+  userId,
+  databaseID,
+  updateFunc
+) => {
   return {
     userId,
     databaseID,

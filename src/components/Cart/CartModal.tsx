@@ -1,21 +1,38 @@
 import Close from "../../assets/icons/Close";
 import Loading from "../Loading/Loading";
 import Remove from "../../assets/icons/Remove";
-import PropTypes from "prop-types";
 import useCart from "../../hooks/product/useCart";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
+import { productDetail, voidFuncType, userCartDetailType } from "../../@types";
 
-const CartModal = ({ toggleFunc, cartData, userItem, userId, userDetail }) => {
+interface CardModalProps {
+  toggleFunc: voidFuncType;
+  userItem: productDetail | {};
+  cartData: productDetail[];
+  userId: string;
+  userDetail: ReturnType<userCartDetailType>;
+}
+
+const CartModal: FC<CardModalProps> = ({
+  toggleFunc,
+  cartData,
+  userItem,
+  userId,
+  userDetail,
+}) => {
   const { RemoveFromCart, loading, error, resolved } = useCart();
 
   const removeItemHandler = () => {
-    RemoveFromCart(
-      cartData,
-      userItem,
-      userId,
-      userDetail.updateFunc,
-      userDetail.databaseID
-    );
+    // 'id' is one of key in userItem
+    if ("id" in userItem) {
+      RemoveFromCart(
+        cartData,
+        userItem,
+        userId,
+        userDetail.updateFunc,
+        userDetail.databaseID
+      );
+    }
   };
 
   const exitModal = () => {
@@ -72,12 +89,3 @@ const CartModal = ({ toggleFunc, cartData, userItem, userId, userDetail }) => {
   );
 };
 export default CartModal;
-
-CartModal.propTypes = {
-  loading: PropTypes.bool,
-  toggleFunc: PropTypes.func,
-  cartData: PropTypes.array,
-  userItem: PropTypes.object,
-  userId: PropTypes.string,
-  userDetail: PropTypes.object,
-};
