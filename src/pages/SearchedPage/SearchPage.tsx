@@ -4,12 +4,20 @@ import FavoriteList from "../../components/FavoriteList/FavoriteList";
 import CardList from "../../components/CardList/CardList";
 import { GUESTS, USERS } from "../../constants/Types";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+import { FC } from "react";
+import { RootState } from "../../redux";
 
-const SearchPage = ({ isAuthenticated, userId }) => {
-  const { mainData } = useSelector((state) => state.data);
-  const visitorData = useSelector((state) => state.visitor.data);
-  const activeUserData = useSelector((state) => state.activeUser.data);
+interface SearchPageProps {
+  isAuthenticated: boolean;
+  userId: string;
+}
+
+const SearchPage: FC<SearchPageProps> = ({ isAuthenticated, userId }) => {
+  const { mainData } = useSelector((state: RootState) => state.data);
+  const visitorData = useSelector((state: RootState) => state.visitor.data);
+  const activeUserData = useSelector(
+    (state: RootState) => state.activeUser.data
+  );
 
   // const
   const { id } = useParams();
@@ -19,10 +27,10 @@ const SearchPage = ({ isAuthenticated, userId }) => {
 
   const filterdata = mainData.filter(
     (el) =>
-      el.title.toLocaleLowerCase().includes(id.toLocaleLowerCase()) ||
-      el.group.toLocaleLowerCase().includes(id.toLocaleLowerCase())
+      id &&
+      (el.title.toLocaleLowerCase().includes(id.toLocaleLowerCase()) ||
+        el.group.toLocaleLowerCase().includes(id.toLocaleLowerCase()))
   );
-
 
   if (filterdata.length === 0)
     return (
@@ -65,8 +73,3 @@ const SearchPage = ({ isAuthenticated, userId }) => {
   );
 };
 export default SearchPage;
-
-SearchPage.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  userId: PropTypes.string,
-};

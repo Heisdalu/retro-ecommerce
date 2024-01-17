@@ -36,6 +36,8 @@ function App() {
   const guestId = useIdentifier();
   useAuthObserver();
 
+  const stringGuestId: string = typeof guestId === "string" ? guestId : "";
+
   useEffect(() => {
     dispatch(fetchData());
   }, [dispatch]);
@@ -89,12 +91,10 @@ function App() {
                   isAuthenticated ? (
                     <MainPage
                       userId={"uid" in userAuthDetail ? userAuthDetail.uid : ""}
-                      guestId={typeof guestId === "string" ? guestId : ""}
+                      guestId={stringGuestId}
                     />
                   ) : (
-                    <VisitorPage
-                      userId={typeof guestId === "string" ? guestId : ""}
-                    />
+                    <VisitorPage userId={stringGuestId} />
                   )
                 }
               />
@@ -113,9 +113,7 @@ function App() {
                     userId={
                       isAuthenticated && "uid" in userAuthDetail
                         ? userAuthDetail.uid
-                        : typeof guestId === "string"
-                        ? guestId
-                        : ""
+                        : stringGuestId
                     }
                     isAuthenticated={isAuthenticated}
                   />
@@ -129,9 +127,7 @@ function App() {
                     userId={
                       isAuthenticated && "uid" in userAuthDetail
                         ? userAuthDetail.uid
-                        : typeof guestId === "string"
-                        ? guestId
-                        : ""
+                        : stringGuestId
                     }
                   />
                 }
@@ -145,7 +141,7 @@ function App() {
                     userId={
                       isAuthenticated && "uid" in userAuthDetail
                         ? userAuthDetail.uid
-                        : guestId
+                        : stringGuestId
                     }
                   />
                 }
