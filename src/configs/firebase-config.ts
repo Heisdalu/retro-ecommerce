@@ -4,8 +4,8 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: process.env.VITE_RETRO_APIKEY,
-  authDomain: process.env.VITE_URL,
+  apiKey: import.meta.env.VITE_RETRO_APIKEY,
+  authDomain: "retro-ecommerce-7df8d.firebaseapp.com",
   projectId: "retro-ecommerce-7df8d",
   storageBucket: "retro-ecommerce-7df8d.appspot.com",
   messagingSenderId: "710915029167",
